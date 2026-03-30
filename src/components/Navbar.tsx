@@ -1,6 +1,7 @@
-import { Leaf, ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +18,12 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <a href="#home" className="flex items-center gap-2">
-          <Leaf className="h-7 w-7 text-secondary" />
+          <img src={logo} alt="Millet Mithai" className="h-12 w-12 rounded-full object-cover" />
           <span className="font-heading text-xl font-bold text-primary">
             Millet Mithai
           </span>
         </a>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -40,7 +40,6 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile toggle */}
         <button
           className="md:hidden text-foreground"
           onClick={() => setIsOpen(!isOpen)}
@@ -49,7 +48,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden bg-background border-b border-border px-4 pb-4">
           {navLinks.map((link) => (
