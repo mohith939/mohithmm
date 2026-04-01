@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,36 +6,36 @@
 
 @layer base {
   :root {
-    --background: 35 25% 95%;
-    --foreground: 25 30% 12%;
+    --background: 40 30% 97%;
+    --foreground: 150 25% 12%;
 
-    --card: 35 20% 92%;
-    --card-foreground: 25 30% 12%;
+    --card: 40 25% 94%;
+    --card-foreground: 150 25% 12%;
 
-    --popover: 35 20% 92%;
-    --popover-foreground: 25 30% 12%;
+    --popover: 40 25% 94%;
+    --popover-foreground: 150 25% 12%;
 
-    --primary: 25 45% 22%;
-    --primary-foreground: 35 25% 95%;
+    --primary: 145 35% 22%;
+    --primary-foreground: 40 30% 97%;
 
-    --secondary: 30 35% 42%;
-    --secondary-foreground: 35 25% 95%;
+    --secondary: 150 20% 35%;
+    --secondary-foreground: 40 30% 97%;
 
-    --muted: 35 18% 88%;
-    --muted-foreground: 25 15% 45%;
+    --muted: 40 15% 90%;
+    --muted-foreground: 150 10% 42%;
 
-    --accent: 45 100% 60%;
-    --accent-foreground: 25 45% 12%;
+    --accent: 42 85% 52%;
+    --accent-foreground: 150 30% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --earth: 20 50% 30%;
-    --earth-foreground: 35 25% 95%;
+    --earth: 145 30% 28%;
+    --earth-foreground: 40 30% 97%;
 
-    --border: 30 15% 82%;
-    --input: 30 15% 82%;
-    --ring: 25 45% 22%;
+    --border: 40 12% 86%;
+    --input: 40 12% 86%;
+    --ring: 145 35% 22%;
 
     --radius: 0.75rem;
 
@@ -48,8 +48,8 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
   }
 }
 
