@@ -9,19 +9,22 @@ const reasons = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-card">
+    <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground text-center mb-14">
-          Why Choose <span className="text-secondary">Millet Mithai</span>?
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-xs uppercase tracking-[0.25em] font-medium text-accent mb-4 block">Why Us</span>
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground">
+            Why Choose <span className="text-primary">Millet Mithai</span>?
+          </h2>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
           {reasons.map((r) => (
-            <div key={r.title} className="text-center p-6 rounded-2xl bg-background border border-border hover:border-secondary/50 transition-colors">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-secondary/10 text-secondary mb-4">
+            <div key={r.title} className="text-center p-8 rounded-3xl bg-card border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 group">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/8 text-primary mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                 <r.icon className="h-7 w-7" />
               </div>
-              <h3 className="font-heading font-semibold text-foreground mb-2">{r.title}</h3>
-              <p className="text-sm text-muted-foreground">{r.description}</p>
+              <h3 className="font-heading font-semibold text-foreground mb-2 text-lg">{r.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{r.description}</p>
             </div>
           ))}
         </div>
