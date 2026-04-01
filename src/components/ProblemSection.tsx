@@ -20,12 +20,13 @@ const problems = [
 
 const ProblemSection = () => {
   return (
-    <section className="py-20 bg-card">
+    <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs uppercase tracking-[0.25em] font-medium text-secondary mb-4 block">The Problem</span>
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
             Tired of choosing between{" "}
-            <span className="text-accent">junk food</span> and{" "}
+            <span className="text-destructive">junk food</span> and{" "}
             <span className="text-secondary">long cooking</span>?
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -37,15 +38,15 @@ const ProblemSection = () => {
           {problems.map((problem) => (
             <div
               key={problem.title}
-              className="text-center p-8 rounded-2xl bg-background border border-border hover:shadow-lg transition-shadow"
+              className="text-center p-8 rounded-2xl bg-card border border-border hover:shadow-xl hover:border-secondary/30 transition-all duration-300"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-destructive/10 text-destructive mb-5">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-destructive/8 text-destructive mb-6">
                 <problem.icon className="h-7 w-7" />
               </div>
-              <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
+              <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
                 {problem.title}
               </h3>
-              <p className="text-muted-foreground text-sm">{problem.description}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{problem.description}</p>
             </div>
           ))}
         </div>

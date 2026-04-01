@@ -1,4 +1,4 @@
-import { Play } from "lucide-react";
+import { Play, Instagram } from "lucide-react";
 
 const reels = [
   {
@@ -25,10 +25,13 @@ const reels = [
 
 const InstagramReels = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-14">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
+        <div className="text-center mb-16">
+          <span className="text-xs uppercase tracking-[0.25em] font-medium text-secondary mb-4 flex items-center justify-center gap-2">
+            <Instagram className="h-4 w-4" /> Follow Us
+          </span>
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-3">
             Watch Our <span className="text-accent">Reels</span>
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -36,28 +39,28 @@ const InstagramReels = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
           {reels.map((reel) => (
             <a
               key={reel.id}
               href="https://www.instagram.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-muted border border-border hover:shadow-xl transition-all"
+              className="group relative aspect-[9/16] rounded-3xl overflow-hidden bg-muted border border-border hover:shadow-2xl transition-all duration-500"
             >
               <img
                 src={reel.thumbnail}
                 alt={reel.title}
                 loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="w-14 h-14 rounded-full bg-accent/90 flex items-center justify-center">
-                  <Play className="h-6 w-6 text-accent-foreground fill-accent-foreground ml-0.5" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-16 h-16 rounded-full bg-accent/90 flex items-center justify-center shadow-xl backdrop-blur-sm">
+                  <Play className="h-7 w-7 text-accent-foreground fill-accent-foreground ml-0.5" />
                 </div>
               </div>
-              <div className="absolute bottom-3 left-3 right-3">
+              <div className="absolute bottom-4 left-4 right-4">
                 <p className="text-primary-foreground text-xs font-semibold">{reel.title}</p>
               </div>
             </a>
