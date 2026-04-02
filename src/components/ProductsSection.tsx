@@ -1,20 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
-import productIdly from "@/assets/product-idly-mix.jpg";
-import productNoodles from "@/assets/product-noodles.jpg";
+import { Link } from "react-router-dom";
+import productChutney from "@/assets/product-peanut-chutney.png";
+import productMilk from "@/assets/product-millet-milk.png";
 
 const products = [
   {
-    name: "Instant Idly/Dosa Mix",
-    image: productIdly,
+    id: "peanut-chutney-mix",
+    name: "Instant Peanut Chutney Mix",
+    image: productChutney,
     price: "₹120",
-    benefits: ["Rich in fiber", "No preservatives", "Ready in 5 mins"],
+    benefits: ["No preservatives", "No palm oil", "Ready in 5 mins"],
   },
   {
-    name: "Millet Noodles",
-    image: productNoodles,
-    price: "₹99",
-    benefits: ["High protein", "Gluten-free option", "Quick preparation"],
+    id: "millet-milk-mix",
+    name: "Millet Milk Mix",
+    image: productMilk,
+    price: "₹149",
+    benefits: ["Sprouted Jowar & Ragi", "Rich in calcium", "Natural sweetener"],
   },
 ];
 
@@ -34,9 +37,10 @@ const ProductsSection = () => {
 
         <div className="grid md:grid-cols-2 gap-10 max-w-3xl mx-auto">
           {products.map((product) => (
-            <div
-              key={product.name}
-              className="rounded-3xl overflow-hidden bg-background border border-border hover:shadow-2xl transition-all duration-500 group"
+            <Link
+              to={`/products/${product.id}`}
+              key={product.id}
+              className="rounded-3xl overflow-hidden bg-background border border-border hover:shadow-2xl transition-all duration-500 group block"
             >
               <div className="aspect-square overflow-hidden bg-muted">
                 <img
@@ -63,12 +67,12 @@ const ProductsSection = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full gap-2 rounded-full" size="lg">
+                <Button className="w-full gap-2 rounded-full" size="lg" onClick={(e) => e.preventDefault()}>
                   <ShoppingCart className="h-4 w-4" />
                   Add to Cart
                 </Button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

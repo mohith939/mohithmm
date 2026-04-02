@@ -17,16 +17,16 @@ const slides = [
   {
     image: productChutney,
     tag: "⚡ Quick & Nutritious",
-    title: "Instant Idly &",
-    highlight: "Dosa Mix",
-    description: "Rich in fiber, zero preservatives. A wholesome breakfast ready in minutes.",
+    title: "Instant Peanut",
+    highlight: "Chutney Mix",
+    description: "No preservatives, no palm oil. A delicious peanut chutney ready in just 5 minutes.",
   },
   {
     image: productMilk,
-    tag: "🍜 Healthy Comfort Food",
+    tag: "🥛 Healthy & Delicious",
     title: "Millet",
-    highlight: "Noodles",
-    description: "High protein, gluten-free noodles that taste amazing. Your guilt-free snack.",
+    highlight: "Milk Mix",
+    description: "Sprouted jowar & ragi with cocoa, nuts & dates. Add to milk for a nutritious drink.",
   },
 ];
 
@@ -64,8 +64,8 @@ const HeroSection = () => {
                   width={1280}
                   height={720}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/50" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-primary/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
               </div>
               <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-2xl">

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Star, Wheat, Leaf, Heart } from "lucide-react";
+import { ShoppingCart, Wheat, Leaf, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -61,7 +61,7 @@ const Products = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {products.map((product) => (
-              <div key={product.id} className="bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 group">
+              <Link to={`/products/${product.id}`} key={product.id} className="bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 group block">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <img
                     src={product.image}
@@ -81,15 +81,6 @@ const Products = () => {
                 </div>
 
                 <div className="p-8">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-accent text-accent" : "text-border"}`} />
-                      ))}
-                    </div>
-                    <span className="text-sm text-muted-foreground">{product.rating} ({product.reviews} reviews)</span>
-                  </div>
-
                   <h2 className="font-heading text-2xl font-bold text-foreground mb-2">{product.name}</h2>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-5">{product.description}</p>
 
@@ -118,15 +109,13 @@ const Products = () => {
                       <span className="text-3xl font-bold text-primary">{product.price}</span>
                       <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
                     </div>
-                    <Link to="/checkout">
-                      <Button className="gap-2 rounded-full px-8" size="lg">
-                        <ShoppingCart className="h-4 w-4" />
-                        Buy Now
-                      </Button>
-                    </Link>
+                    <Button className="gap-2 rounded-full px-8" size="lg" onClick={(e) => e.preventDefault()}>
+                      <ShoppingCart className="h-4 w-4" />
+                      Add to Cart
+                    </Button>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
