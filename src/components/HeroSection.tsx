@@ -51,11 +51,11 @@ const HeroSection = () => {
   }, [emblaApi]);
 
   return (
-    <section id="home" className="relative">
+    <section id="home" className="relative pt-20">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, i) => (
-            <div key={i} className="relative min-h-[100vh] flex items-center flex-[0_0_100%]">
+            <div key={i} className="relative min-h-[70vh] md:min-h-[80vh] flex items-center flex-[0_0_100%]">
               <div className="absolute inset-0 z-0">
                 <img
                   src={slide.image}
