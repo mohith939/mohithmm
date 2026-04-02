@@ -15,7 +15,7 @@ const slides = [
     description: "No junk. No long cooking. Just clean millet-based food designed for your busy life.",
   },
   {
-    image: productIdly,
+    image: productChutney,
     tag: "⚡ Quick & Nutritious",
     title: "Instant Idly &",
     highlight: "Dosa Mix",
