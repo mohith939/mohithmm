@@ -3,8 +3,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import heroImage from "@/assets/hero-food.jpg";
-import productIdly from "@/assets/product-idly-mix.jpg";
-import productNoodles from "@/assets/product-noodles.jpg";
+import productChutney from "@/assets/product-peanut-chutney.png";
+import productMilk from "@/assets/product-millet-milk.png";
 
 const slides = [
   {
