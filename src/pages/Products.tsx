@@ -61,7 +61,7 @@ const Products = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {products.map((product) => (
-              <div key={product.id} className="bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 group">
+              <Link to={`/products/${product.id}`} key={product.id} className="bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 group block">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <img
                     src={product.image}
