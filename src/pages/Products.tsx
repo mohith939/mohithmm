@@ -3,33 +3,33 @@ import { ShoppingCart, Star, Wheat, Leaf, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import productIdly from "@/assets/product-idly-mix.jpg";
-import productNoodles from "@/assets/product-noodles.jpg";
+import productChutney from "@/assets/product-peanut-chutney.png";
+import productMilk from "@/assets/product-millet-milk.png";
 
 const products = [
   {
-    id: "idly-dosa-mix",
-    name: "Instant Idly/Dosa Mix",
-    image: productIdly,
+    id: "peanut-chutney-mix",
+    name: "Instant Peanut Chutney Mix",
+    image: productChutney,
     price: "₹120",
     originalPrice: "₹160",
     rating: 4.8,
     reviews: 124,
-    benefits: ["Rich in fiber", "No preservatives", "Ready in 5 mins", "100% natural millets"],
-    description: "A wholesome breakfast mix made from premium millet grains. Just add water, mix, and cook for fluffy idlys or crispy dosas in under 5 minutes.",
-    tags: ["Bestseller", "Gluten-Free"],
+    benefits: ["No preservatives", "No palm oil", "Ready in 5 mins", "100% natural"],
+    description: "A delicious peanut chutney mix made with peanuts, dry chilli, tamarind, curry leaves, cumin seeds & garlic. Just add water and enjoy!",
+    tags: ["Bestseller", "500g Pack"],
     nutrition: { protein: "12g", fiber: "8g", calories: "180 kcal" },
   },
   {
-    id: "millet-noodles",
-    name: "Millet Noodles",
-    image: productNoodles,
-    price: "₹99",
-    originalPrice: "₹140",
+    id: "millet-milk-mix",
+    name: "Millet Milk Mix",
+    image: productMilk,
+    price: "₹149",
+    originalPrice: "₹199",
     rating: 4.7,
     reviews: 98,
-    benefits: ["High protein", "Gluten-free option", "Quick preparation", "No maida"],
-    description: "Delicious noodles made entirely from millet flour. High in protein, zero maida, and ready in just 3 minutes. The perfect guilt-free comfort food.",
+    benefits: ["Sprouted Jowar & Ragi", "Rich in calcium", "Natural sweetener", "No maida"],
+    description: "Nutritious millet milk mix with sprouted jowar, ragi, cocoa powder, nuts & dry dates. Add 2 spoons to milk and enjoy a healthy drink.",
     tags: ["New", "High Protein"],
     nutrition: { protein: "14g", fiber: "6g", calories: "160 kcal" },
   },
@@ -118,10 +118,12 @@ const Products = () => {
                       <span className="text-3xl font-bold text-primary">{product.price}</span>
                       <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
                     </div>
-                    <Button className="gap-2 rounded-full px-8" size="lg">
-                      <ShoppingCart className="h-4 w-4" />
-                      Add to Cart
-                    </Button>
+                    <Link to="/checkout">
+                      <Button className="gap-2 rounded-full px-8" size="lg">
+                        <ShoppingCart className="h-4 w-4" />
+                        Buy Now
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -140,7 +142,7 @@ const Products = () => {
               { icon: ShoppingCart, title: "Free Delivery", desc: "On orders above ₹499" },
             ].map((item) => (
               <div key={item.title} className="flex flex-col items-center">
-                <div className="w-14 h-14 rounded-2xl bg-primary/8 text-primary flex items-center justify-center mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
                   <item.icon className="h-7 w-7" />
                 </div>
                 <h3 className="font-heading font-semibold text-foreground mb-1">{item.title}</h3>
