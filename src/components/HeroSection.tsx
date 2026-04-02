@@ -3,8 +3,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import heroImage from "@/assets/hero-food.jpg";
-import productIdly from "@/assets/product-idly-mix.jpg";
-import productNoodles from "@/assets/product-noodles.jpg";
+import productChutney from "@/assets/product-peanut-chutney.png";
+import productMilk from "@/assets/product-millet-milk.png";
 
 const slides = [
   {
@@ -15,14 +15,14 @@ const slides = [
     description: "No junk. No long cooking. Just clean millet-based food designed for your busy life.",
   },
   {
-    image: productIdly,
+    image: productChutney,
     tag: "⚡ Quick & Nutritious",
     title: "Instant Idly &",
     highlight: "Dosa Mix",
     description: "Rich in fiber, zero preservatives. A wholesome breakfast ready in minutes.",
   },
   {
-    image: productNoodles,
+    image: productMilk,
     tag: "🍜 Healthy Comfort Food",
     title: "Millet",
     highlight: "Noodles",
@@ -51,11 +51,11 @@ const HeroSection = () => {
   }, [emblaApi]);
 
   return (
-    <section id="home" className="relative">
+    <section id="home" className="relative pt-20">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, i) => (
-            <div key={i} className="relative min-h-[100vh] flex items-center flex-[0_0_100%]">
+            <div key={i} className="relative min-h-[70vh] md:min-h-[80vh] flex items-center flex-[0_0_100%]">
               <div className="absolute inset-0 z-0">
                 <img
                   src={slide.image}
