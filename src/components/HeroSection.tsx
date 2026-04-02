@@ -22,7 +22,7 @@ const slides = [
     description: "Rich in fiber, zero preservatives. A wholesome breakfast ready in minutes.",
   },
   {
-    image: productNoodles,
+    image: productMilk,
     tag: "🍜 Healthy Comfort Food",
     title: "Millet",
     highlight: "Noodles",
