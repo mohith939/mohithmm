@@ -17,16 +17,16 @@ const slides = [
   {
     image: productChutney,
     tag: "⚡ Quick & Nutritious",
-    title: "Instant Idly &",
-    highlight: "Dosa Mix",
-    description: "Rich in fiber, zero preservatives. A wholesome breakfast ready in minutes.",
+    title: "Instant Peanut",
+    highlight: "Chutney Mix",
+    description: "No preservatives, no palm oil. A delicious peanut chutney ready in just 5 minutes.",
   },
   {
     image: productMilk,
-    tag: "🍜 Healthy Comfort Food",
+    tag: "🥛 Healthy & Delicious",
     title: "Millet",
-    highlight: "Noodles",
-    description: "High protein, gluten-free noodles that taste amazing. Your guilt-free snack.",
+    highlight: "Milk Mix",
+    description: "Sprouted jowar & ragi with cocoa, nuts & dates. Add to milk for a nutritious drink.",
   },
 ];
 
