@@ -81,15 +81,6 @@ const Products = () => {
                 </div>
 
                 <div className="p-8">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-accent text-accent" : "text-border"}`} />
-                      ))}
-                    </div>
-                    <span className="text-sm text-muted-foreground">{product.rating} ({product.reviews} reviews)</span>
-                  </div>
-
                   <h2 className="font-heading text-2xl font-bold text-foreground mb-2">{product.name}</h2>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-5">{product.description}</p>
 
