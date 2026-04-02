@@ -10,6 +10,7 @@ import AboutUs from "./pages/AboutUs.tsx";
 import HowItWorks from "./pages/HowItWorks.tsx";
 import Contact from "./pages/Contact.tsx";
 import Checkout from "./pages/Checkout.tsx";
+import ProductDetail from "./pages/ProductDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
