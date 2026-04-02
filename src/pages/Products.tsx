@@ -109,15 +109,13 @@ const Products = () => {
                       <span className="text-3xl font-bold text-primary">{product.price}</span>
                       <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
                     </div>
-                    <Link to="/checkout">
-                      <Button className="gap-2 rounded-full px-8" size="lg">
-                        <ShoppingCart className="h-4 w-4" />
-                        Buy Now
-                      </Button>
-                    </Link>
+                    <Button className="gap-2 rounded-full px-8" size="lg" onClick={(e) => e.preventDefault()}>
+                      <ShoppingCart className="h-4 w-4" />
+                      Add to Cart
+                    </Button>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
