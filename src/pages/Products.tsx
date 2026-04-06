@@ -3,41 +3,18 @@ import { ShoppingCart, Wheat, Leaf, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import productChutney from "@/assets/product-peanut-chutney.png";
-import productMilk from "@/assets/product-millet-milk.png";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
+import productsData from '../products.json';
 
-const products = [
-  {
-    id: "peanut-chutney-mix",
-    name: "Instant Peanut Chutney Mix",
-    image: productChutney,
-    price: "₹120",
-    originalPrice: "₹160",
-    rating: 4.8,
-    reviews: 124,
-    benefits: ["No preservatives", "No palm oil", "Ready in 5 mins", "100% natural"],
-    description: "A delicious peanut chutney mix made with peanuts, dry chilli, tamarind, curry leaves, cumin seeds & garlic. Just add water and enjoy!",
-    tags: ["Bestseller", "500g Pack"],
-    nutrition: { protein: "12g", fiber: "8g", calories: "180 kcal" },
-  },
-  {
-    id: "millet-milk-mix",
-    name: "Millet Milk Mix",
-    image: productMilk,
-    price: "₹149",
-    originalPrice: "₹199",
-    rating: 4.7,
-    reviews: 98,
-    benefits: ["Sprouted Jowar & Ragi", "Rich in calcium", "Natural sweetener", "No maida"],
-    description: "Nutritious millet milk mix with sprouted jowar, ragi, cocoa powder, nuts & dry dates. Add 2 spoons to milk and enjoy a healthy drink.",
-    tags: ["New", "High Protein"],
-    nutrition: { protein: "14g", fiber: "6g", calories: "160 kcal" },
-  },
-];
+const products = productsData;
 
-const Products = () => {
+  const Products = () => {
+   const { addItem } = useCart();
+   const { toast } = useToast();
   return (
     <div className="min-h-screen">
+
       <Navbar />
 
       {/* Hero */}
@@ -64,10 +41,16 @@ const Products = () => {
               <Link to={`/products/${product.id}`} key={product.id} className="bg-card rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 group block">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    src={product.frontImage}
+                    alt={`${product.name} front`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-100 group-hover:opacity-0 absolute inset-0 z-10"
                   />
+                  <img
+                    src={product.backImage || product.frontImage}
+                    alt={`${product.name} back`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-0 group-hover:opacity-100 absolute inset-0 z-0"
+                  />
+
                   <div className="absolute top-4 left-4 flex gap-2">
                     {product.tags.map((tag) => (
                       <span key={tag} className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-semibold shadow-md">
@@ -109,8 +92,27 @@ const Products = () => {
                       <span className="text-3xl font-bold text-primary">{product.price}</span>
                       <span className="text-lg text-muted-foreground line-through">{product.originalPrice}</span>
                     </div>
-                    <Button className="gap-2 rounded-full px-8" size="lg" onClick={(e) => e.preventDefault()}>
-                      <ShoppingCart className="h-4 w-4" />
+                    <Button 
+                      type="button"
+                      className="gap-2 rounded-full px-8 hover:shadow-md transition-all" 
+                      size="lg" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addItem({
+                          id: product.id,
+                          name: product.name,
+                          image: product.frontImage,
+                          price: product.price
+                        });
+
+                        toast({
+                          title: "Success",
+                          description: `${product.name} added to cart!`,
+                          duration: 3000
+                        });
+                      }}
+                    >
+<ShoppingCart className="h-5 w-5" />
                       Add to Cart
                     </Button>
                   </div>

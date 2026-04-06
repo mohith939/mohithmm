@@ -1,7 +1,6 @@
 import { Target, Eye, Heart, Users, Award, Sprout } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import logo from "@/assets/logo.png";
 
 const values = [
   { icon: Heart, title: "Health First", description: "Every product is crafted to nourish your body with the goodness of millets." },
@@ -40,7 +39,7 @@ const AboutUs = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <img src={logo} alt="Millet Mithai Founders" className="w-full max-w-sm mx-auto rounded-3xl shadow-2xl" />
+              <img src="/logo 5 1-01 (1).png" alt="Millet Mithai Founders" className="w-full max-w-sm mx-auto rounded-3xl shadow-2xl" />
             </div>
             <div>
               <span className="text-xs uppercase tracking-[0.25em] font-medium text-secondary mb-4 block">How It Started</span>
@@ -133,3 +132,4 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+

@@ -1,17 +1,70 @@
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const Contact = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(50),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone must be at least 10 digits").max(15),
+  subject: z.string().min(2, "Subject must be at least 2 characters").max(100),
+  message: z.string().min(10, "Message must be at least 10 characters").max(1000),
+});
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Placeholder — integrate with backend later
-    alert("Thank you! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+type FormData = z.infer<typeof formSchema>;
+
+const Contact = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(import.meta.env.VITE_CONTACT_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your message has been sent. We'll get back to you soon.",
+      });
+
+      form.reset();
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -53,8 +106,8 @@ const Contact = () => {
                   { icon: Mail, label: "Email", value: "hello@milletmithai.com", href: "mailto:hello@milletmithai.com" },
                   { icon: MapPin, label: "Location", value: "Hyderabad, India", href: "#" },
                   { icon: Clock, label: "Hours", value: "Mon–Sat, 9 AM – 7 PM", href: "#" },
-                ].map((item) => (
-                  <a key={item.label} href={item.href} className="flex items-start gap-4 group">
+                ].map((item, index) => (
+                  <a key={index} href={item.href} className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-2xl bg-primary/8 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <item.icon className="h-5 w-5" />
                     </div>
@@ -69,66 +122,103 @@ const Contact = () => {
 
             {/* Form */}
             <div className="lg:col-span-3">
-              <form onSubmit={handleSubmit} className="bg-card rounded-3xl p-8 md:p-10 border border-border shadow-lg">
-                <div className="flex items-center gap-3 mb-8">
-                  <MessageCircle className="h-6 w-6 text-primary" />
-                  <h3 className="font-heading text-xl font-bold text-foreground">Send a Message</h3>
-                </div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="bg-card rounded-3xl p-8 md:p-10 border border-border shadow-lg space-y-6">
+                  <div className="flex items-center gap-3">
+                    <MessageCircle className="h-6 w-6 text-primary" />
+                    <h3 className="font-heading text-xl font-bold text-foreground">Send a Message</h3>
+                  </div>
 
-                <div className="grid sm:grid-cols-2 gap-5 mb-5">
-                  <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                      placeholder="Your name"
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="you@example.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                </div>
 
-                <div className="mb-5">
-                  <label className="text-sm font-medium text-foreground mb-2 block">Subject</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-                    placeholder="What's this about?"
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone</FormLabel>
+                        <FormControl>
+                          <Input placeholder="+91 98765 43210" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <div className="mb-6">
-                  <label className="text-sm font-medium text-foreground mb-2 block">Message</label>
-                  <textarea
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
-                    placeholder="Tell us what's on your mind..."
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Subject</FormLabel>
+                        <FormControl>
+                          <Input placeholder="What's this about?" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
 
-                <Button type="submit" size="lg" className="w-full rounded-full gap-2">
-                  <Send className="h-4 w-4" />
-                  Send Message
-                </Button>
-              </form>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us what's on your mind..."
+                            rows={5}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button type="submit" size="lg" className="w-full rounded-full gap-2" disabled={isLoading}>
+                    {isLoading ? (
+                      <>
+                        <Send className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </div>
         </div>
@@ -140,3 +230,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

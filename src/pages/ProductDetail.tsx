@@ -1,45 +1,40 @@
 import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, ArrowLeft, Leaf, ShieldCheck, Truck, Clock } from "lucide-react";
+import { ShoppingCart, ArrowLeft, Leaf, ShieldCheck, Truck, Clock, Minus, Plus } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import productChutney from "@/assets/product-peanut-chutney.png";
-import productMilk from "@/assets/product-millet-milk.png";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
+import productsData from '../products.json';
 
-const allProducts = [
-  {
-    id: "peanut-chutney-mix",
-    name: "Instant Peanut Chutney Mix",
-    image: productChutney,
-    price: "₹120",
-    originalPrice: "₹160",
-    weight: "500g",
-    description: "A delicious peanut chutney mix made with peanuts, dry chilli, tamarind, curry leaves, cumin seeds & garlic. Just add 4 spoons of mix into a bowl, add a pinch of salt and water — ready in 5 minutes!",
-    benefits: ["No preservatives", "No palm oil", "Ready in 5 mins", "100% natural", "FSSAI certified"],
-    ingredients: ["Peanuts", "Dry Chilli", "Tamarind", "Curry Leaves", "Cumin Seeds", "Garlic"],
-    howToUse: "Take 4 spoons of mix into a bowl, add a pinch of salt and water. Mix well and serve with idly, dosa, or rice.",
-    nutrition: { protein: "12g", fiber: "8g", calories: "180 kcal" },
-    tags: ["Bestseller", "500g Pack"],
-  },
-  {
-    id: "millet-milk-mix",
-    name: "Millet Milk Mix",
-    image: productMilk,
-    price: "₹149",
-    originalPrice: "₹199",
-    weight: "250g",
-    description: "Nutritious millet milk mix made with sprouted jowar, sprouted ragi, cocoa powder, dry dates powder, nuts (almonds, cashews, pistachios) and natural cocoa powder. A healthy and delicious drink for the whole family.",
-    benefits: ["Sprouted Jowar & Ragi", "Rich in calcium & iron", "Natural sweetener", "No maida", "Improves digestion"],
-    ingredients: ["Sprouted Jowar", "Sprouted Ragi", "Cocoa Powder", "Dry Dates Powder", "Nuts (Almonds, Cashews, Pistachios)", "Natural Cocoa Powder"],
-    howToUse: "Add 2 spoons of millet mix in a glass of milk. Use jaggery for better taste. Stir well and enjoy hot or cold.",
-    nutrition: { protein: "14g", fiber: "6g", calories: "160 kcal" },
-    tags: ["New", "High Protein"],
-  },
-];
+const allProducts = productsData;
+
+interface Product {
+  id: string;
+  name: string;
+  frontImage: string;
+  backImage: string;
+  price: string;
+  originalPrice: string;
+  weight: string;
+  description: string;
+  benefits: string[];
+  ingredients: string[];
+  howToUse: string;
+  nutrition: Record<string, string>;
+  tags: string[];
+}
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const product = allProducts.find((p) => p.id === productId);
+  const { addItemWithQuantity } = useCart();
+  const { toast } = useToast();
+  const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [viewBack, setViewBack] = useState(false);
+  const product = allProducts.find((p: Product) => p.id === productId) as Product | undefined;
+
 
   if (!product) {
     return (
@@ -54,6 +49,10 @@ const ProductDetail = () => {
     );
   }
 
+  const currentPrice = parseInt(product.price.replace(/[^0-9]/g, '')) || 0;
+  const originalPrice = parseInt(product.originalPrice.replace(/[^0-9]/g, '')) || 1;
+  const discount = originalPrice > currentPrice ? Math.round((1 - currentPrice / originalPrice) * 100) : 0;
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -67,12 +66,36 @@ const ProductDetail = () => {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Image */}
-            <div className="bg-card rounded-3xl overflow-hidden border border-border">
+            <div className="bg-card rounded-3xl overflow-hidden border border-border relative">
               <img
-                src={product.image}
+                src={viewBack ? (product.backImage || product.frontImage) : product.frontImage}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-[500px] object-cover"
               />
+              {product.backImage && (
+                <div className="absolute top-4 right-4 flex gap-1 bg-background/95 backdrop-blur-sm p-1 rounded-xl border">
+                  <button
+                    onClick={() => setViewBack(false)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                      !viewBack
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    Front
+                  </button>
+                  <button
+                    onClick={() => setViewBack(true)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                      viewBack
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    Back
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Details */}
@@ -93,7 +116,7 @@ const ProductDetail = () => {
                 <span className="text-4xl font-bold text-primary">{product.price}</span>
                 <span className="text-xl text-muted-foreground line-through">{product.originalPrice}</span>
                 <span className="px-2 py-0.5 rounded bg-accent/20 text-accent text-xs font-semibold">
-                  {Math.round((1 - parseInt(product.price.replace('₹', '')) / parseInt(product.originalPrice.replace('₹', ''))) * 100)}% OFF
+                  {discount}% OFF
                 </span>
               </div>
 
@@ -143,17 +166,76 @@ const ProductDetail = () => {
                 <p className="text-sm text-muted-foreground">{product.howToUse}</p>
               </div>
 
+              {/* Quantity Selector */}
+              <div className="flex items-center gap-2 bg-card rounded-xl p-2 mb-6 border border-border shadow-sm min-w-[100px]">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={quantity === 1}
+                  className="h-8 w-8 rounded-lg hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed p-0 border-accent/50 shadow-none"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                >
+                  <Minus className="h-3 w-3" />
+                </Button>
+                <span className="text-lg font-bold text-foreground w-8 text-center mx-1">{quantity}</span>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-8 w-8 rounded-lg hover:bg-accent p-0 border-accent/50 shadow-none"
+                  onClick={() => setQuantity(quantity + 1)}
+                >
+                  <Plus className="h-3 w-3" />
+                </Button>
+              </div>
+
               {/* Add to Cart */}
-              <Button className="w-full gap-2 rounded-full text-base" size="lg">
-                <ShoppingCart className="h-5 w-5" />
-                Add to Cart
+              <Button 
+                type="button"
+                className="w-full gap-2 rounded-full text-base" 
+                size="lg"
+                disabled={isLoading}
+                onClick={async () => {
+                  if (product && !isLoading) {
+                    setIsLoading(true);
+                    addItemWithQuantity({
+                      id: product.id,
+                      name: product.name,
+                      image: product.frontImage,
+                      price: product.price
+                    }, quantity);
+
+                    toast({
+                      title: "Success",
+                      description: `${quantity > 1 ? quantity + ' x ' : ''}${product.name} added to cart!`,
+                      duration: 3000
+                    });
+                    setTimeout(() => setIsLoading(false), 1000);
+                  }
+                }}
+              >
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" pathLength="1" className="opacity-25" />
+                      <path d="M12 12" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" pathLength="1" className="opacity-75" />
+                    </svg>
+                    Adding...
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="h-5 w-5" />
+                    Add {quantity > 1 ? `${quantity} to ` : ''}Cart
+                  </>
+                )}
               </Button>
 
               {/* Trust badges */}
               <div className="flex gap-6 pt-2">
                 {[
-                  { icon: ShieldCheck, text: "FSSAI Certified" },
-                  { icon: Truck, text: "Free delivery above ₹499" },
+                  { icon: ShieldCheck as any, text: "FSSAI Certified" },
+                  { icon: Truck as any, text: "Free delivery above ₹499" },
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-2 text-xs text-muted-foreground">
                     <item.icon className="h-4 w-4 text-primary" />

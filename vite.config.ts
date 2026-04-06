@@ -8,6 +8,14 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      '/gas': {
+        target: 'https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/gas/, '')
+      }
+    },
     hmr: {
       overlay: false,
     },
