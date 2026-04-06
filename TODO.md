@@ -1,9 +1,11 @@
-# Fix ProductDetail.tsx Syntax Error
+# Task: Fix /gas endpoint errors (CORS, 404, mixed content)
 
 ## Steps:
-- [x] Step 1: Remove erroneous `const discount` line from component body
-- [x] Step 2: Add safe discount calculation inside the main return block
-- [x] Step 3: Verify Vite rebuilds without errors
-- [x] Step 4: Test product detail page loads correctly
+- [x] Step 1: Read/verify backend entry points (app.js/server.js, main routes) - Verified GAS script.gs works, vite proxy exists
+- [x] Step 2: Create /gas route handlers in backend (POST order, GET track) - Created server.js proxy to GAS
+- [x] Step 3: Add CORS middleware to backend - Added in server.js
+- [ ] Step 4: Update vite.config.ts with proxy for dev - Already exists, but verify/update origins
+- [x] Step 5: Install backend dependencies if needed - Done, server running on 3001
 
-**Current status:** ✅ Task completed successfully. The syntax error in ProductDetail.tsx has been fixed. Vite HMR should no longer show the error, and product detail pages will display correct discount percentages safely.
+Progress: 4/6 completed
+
