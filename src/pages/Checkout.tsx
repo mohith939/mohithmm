@@ -51,7 +51,8 @@ const Checkout = () => {
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
 
-      const response = await fetch('/gas', {
+      const gasUrl = import.meta.env.VITE_GAS_URL || '/gas';
+      const response = await fetch(gasUrl, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'

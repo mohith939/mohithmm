@@ -1,26 +1,14 @@
-# Millet Mithai Fix 404 Errors - Task Progress
+# Fix Checkout 404 Errors (/gas endpoint)
+yStatus: [ ] In Progress | [x] Planning Complete
 
-## Step 1: ✅ Fix Image Paths [COMPLETE - products.json recreated with %20 paths]
-- Edit src/products.json: Replace all image path spaces ' ' with '%20'
-- e.g. "/Browntop Millet Front.jpeg" → "/Browntop%20Millet%20Front.jpeg"
-- Test: Visit /products, images load.
+## Steps:
+1. **[x] Create .env file** with GAS_URL=full Google Apps Script URL for direct calls as fallback.
+2. **[x] Edit src/pages/Checkout.tsx** - Change fetch('/gas') to use env var `/gas` proxy first, fallback to direct GAS.
+3. **[ ] Test locally** - Run backend proxy and frontend, test checkout form.
+4. **[ ] Deploy backend proxy** - To Vercel/Render/etc so /gas works on milletmithai.in.
+5. **[ ] Deploy frontend** - Update production site.
+6. **[ ] Verify** - Test live checkout on https://milletmithai.in/checkout.
+7. **[ ] Cleanup** - Remove TODO.md.
 
-## Step 2: ✅ Backend /gas Proxy [RUNNING on :3001, proxy chain working]
-- Dev: Backend running on :3001 (proxy to GAS: https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec)
-- Vite dev proxies /gas → backend → GAS exec URL.
-- Production: Deploy backend to milletmithai.in/api or subdomain, update vite proxy if needed.
-- Test: POST /gas from Checkout.
+**Next step:** Create .env (provide GAS_URL from server.js proxy target).
 
-## Step 3: ✅ Test Order Flow [Ready - run npm run dev]
-- Add to cart → Checkout → Place Order (COD) → Success toast + orderId.
-- TrackOrder → Enter phone → See orders.
-
-## Step 4: Production Deploy [PENDING]
-- Deploy Vite to milletmithai.in
-- Deploy backend (Render/Heroku/Vercel) with same GAS proxy.
-- Or direct GAS_URL in frontend env (skip backend).
-
-## Step 5: GAS Improvements [OPTIONAL]
-- script.gs: Fix duplicate status cols, parameterize SHEET_ID/email.
-
-**Next Action:** Proceed with Step 1 edits?
