@@ -15,8 +15,8 @@ const Checkout = () => {
   const { cart, clearCart } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [loading, setLoading ] = useState(false);
+  const [formData, setFormData ] = useState({
     customerName: "",
     phone: "",
     address: "",
@@ -51,7 +51,21 @@ const Checkout = () => {
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
 
-const response = await fetch('/api/gas', {\n        method: 'POST',\n        headers: { \n          'Content-Type': 'application/json'\n        },\n        body: JSON.stringify({\n          customerName: formData.customerName,\n          phone: formData.phone,\n          address,\n          items,\n          totalAmount: grandTotal\n        })\n      });\n\n      const data = await response.json();
+      const response = await fetch('/api/gas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerName: formData.customerName,
+          phone: formData.phone,
+          address,
+          items,
+          totalAmount: grandTotal,
+        }),
+      });
+
+      const data = await response.json();
 
       if (data.success) {
         toast({
