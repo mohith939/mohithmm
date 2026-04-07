@@ -6,9 +6,17 @@
       "config": {
         "distDir": "dist"
       }
+    },
+    {
+      "src": "millet-mithai-backend/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/gas/(.*)",
+      "dest": "millet-mithai-backend/server.js/gas/$1"
+    },
     {
       "src": "/assets/(.*)",
       "headers": {
@@ -22,15 +30,11 @@
       }
     },
     {
-      "src": "/gas/(.*)",
-      "dest": "/gas/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
   "env": {
-    "VITE_GAS_URL": "https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec"
+    "VITE_GAS_URL": "https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec"
   }
 }
