@@ -1,0 +1,7 @@
+# Vercel Config Update TODO
+
+- [x] Step 1: Create backup of current vercel.json as vercel-backup.json
+- [ ] Step 2: Update vercel.json to modern format (remove builds, add buildCommand/outputDirectory)
+- [ ] Step 3: Verify config syntax
+- [ ] Step 4: Provide redeploy instructions
+- [ ] Step 5: Mark complete
