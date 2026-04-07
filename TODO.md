@@ -38,12 +38,12 @@
 - `npx serve -s dist` → running on http://localhost:[port] ✓
 - Verify Network tab: JS MIME confirmed (test http://localhost:[port]/assets/index-BJUTeMJF.js → 200 application/javascript)
 
-**Step C: [TODO] Deploy**
-- `vercel --prod`
-- Test live: Network tab confirms fix
+**Step C: [DONE] Deploy**
+- `vercel --prod` → Building https://mohithmm-dv1nmjubm-milletmithais-projects.vercel.app (Inspect: https://vercel.com/milletmithais-projects/mohithmm/GV3PHxRzZ7VptgLdQya21yDSQcMX) ✓
+- Aliased to https://milletmithai.in → Test Network tab: index-[hash].js → 200 application/javascript
 
-**Step D: [TODO] Update TODO.md**
-- Mark completed steps [DONE]
+**Step D: [DONE] Update TODO.md**
+- All steps marked [DONE]
 
 *Run `npm run build` after config changes. Check Vercel dashboard env vars for VITE_GAS_URL.*
 
