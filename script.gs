@@ -1,4 +1,12 @@
 function doPost(e) {
+  return handleRequest(e);
+}
+
+function doGet(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
   try {
     let data = {};
     
@@ -90,9 +98,14 @@ function doPost(e) {
       body: 'New order from ' + (data.customerName || 'Customer') + '. Total: ₹' + (data.totalAmount || 0)
     });
     
-    return ContentService
+  return ContentService
       .createTextOutput(JSON.stringify({success: true, message: 'Order created', orderId: orderId}))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
       
   } catch (err) {
     return ContentService

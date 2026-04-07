@@ -48,9 +48,9 @@ const ProductDetail = () => {
     await addItemWithQuantity({
       id: product.id,
       name: product.name,
-      image: `/${product.frontImage}`,
+      image: `/${product.frontImage.replace(/ /g, '%20')}`,
       price: product.price,
-      weight: product.weight
+       // weight: product.weight
     }, quantity);
     
     toast({

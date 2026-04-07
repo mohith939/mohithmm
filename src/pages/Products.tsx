@@ -21,9 +21,9 @@ const Products = () => {
     addItem({
       id: product.id,
       name: product.name,
-      image: `/public/${product.frontImage}`,
+      image: `/${product.frontImage}`,
       price: product.price,
-      weight: product.weight
+      // weight: product.weight
     });
     toast({
       title: "Added to Cart",
