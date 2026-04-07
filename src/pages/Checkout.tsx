@@ -51,8 +51,7 @@ const Checkout = () => {
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
 
-const gasUrl = 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec';
-      const response = await fetch(gasUrl, {
+const response = await fetch('/gas', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'

@@ -16,7 +16,7 @@ const TrackOrder = () => {
   const [error, setError] = useState("");
   const { toast } = useToast();
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec';
+// const GAS_URL = 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec';
   
   const handleTrack = async (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQq
     setOrders([]);
 
     try {
-      const response = await fetch(`${GAS_URL}?phone=${phone}`);
+      const response = await fetch(`/gas?phone=${phone}`);
       const data = await response.json();
 
       if (data.success) {
