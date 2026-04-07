@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { 
   ShoppingCart, ArrowLeft, Heart, Truck, ShieldCheck, Star, Minus, Plus, 
-  Clock, Dumbbell, Leaf, Award, Nutrition 
+  Clock, Dumbbell, Leaf, Award 
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -279,7 +279,7 @@ const ProductDetail = () => {
             <div className="bg-card p-8 rounded-3xl border shadow-xl hover:shadow-2xl transition-all">
               <div className="flex items-start gap-4 mb-6">
                 <div className="bg-accent/10 p-3 rounded-2xl">
-                  <Nutrition className="h-8 w-8 text-accent" />
+                  <Award className="h-8 w-8 text-accent" />
                 </div>
                 <div>
                   <h3 className="font-bold text-xl mb-4">Nutrition (100g)</h3>
