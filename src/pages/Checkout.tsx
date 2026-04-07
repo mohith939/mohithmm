@@ -51,7 +51,7 @@ const Checkout = () => {
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
 
-      const gasUrl = import.meta.env.VITE_GAS_URL || 'https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec';
+const gasUrl = import.meta.env.VITE_GAS_URL || 'https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec';
       const response = await fetch(gasUrl, {
         method: 'POST',
         headers: { 

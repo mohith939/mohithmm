@@ -1,14 +1,29 @@
-# Fix Checkout 404 Errors (/gas endpoint)
-yStatus: [ ] In Progress | [x] Planning Complete
+# Millet Mithai Frontend 404 Fix TODO
 
-## Steps:
-1. **[x] Create .env file** with GAS_URL=full Google Apps Script URL for direct calls as fallback.
-2. **[x] Edit src/pages/Checkout.tsx** - Direct GAS URL hardcoded for reliable prod.
-3. **[ ] Test locally** - Run backend proxy and frontend, test checkout form.
-4. **[ ] Deploy backend proxy** - To Vercel/Render/etc so /gas works on milletmithai.in.
-5. **[ ] Deploy frontend** - Update production site.
-6. **[ ] Verify** - Test live checkout on https://milletmithai.in/checkout.
-7. **[ ] Cleanup** - Remove TODO.md.
+## Status: [IN PROGRESS]
 
-**Next step:** Create .env (provide GAS_URL from server.js proxy target).
+### Step 1: [DONE] Update vite.config.ts
+- Add `base: './'` for production asset paths
 
+### Step 2: [DONE] Update GAS URLs to use env vars
+- Checkout.tsx: Replace hardcoded URL with `import.meta.env.VITE_GAS_URL`
+- TrackOrder.tsx: Same
+
+### Step 3: [DONE] Remove all images and product content
+- Products.tsx: Delete product grid/images, simplify to text/buttons
+- ProductDetail.tsx: Delete or simplify
+- products.json: Remove import/use
+- Update components using products
+
+### Step 4: [DONE] Update Vercel config
+- Ensure vercel-new.json used, clean SPA routes
+
+### Step 5: [DONE] Build and test
+- `npm run build` ✓ dist/assets clean (relative paths)
+- Local preview: `npx serve -s dist` running ✓
+
+### Step 6: [PENDING] Deploy and verify
+- `vercel --prod`
+- Test live site network tab
+
+*Completed steps will be marked [DONE]*

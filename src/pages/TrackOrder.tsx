@@ -16,6 +16,8 @@ const TrackOrder = () => {
   const [error, setError] = useState("");
   const { toast } = useToast();
 
+const GAS_URL = import.meta.env.VITE_GAS_URL || 'https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec';
+  
   const handleTrack = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -23,7 +25,7 @@ const TrackOrder = () => {
     setOrders([]);
 
     try {
-      const response = await fetch(`/gas?phone=${phone}`);
+      const response = await fetch(`${GAS_URL}?phone=${phone}`);
       const data = await response.json();
 
       if (data.success) {
