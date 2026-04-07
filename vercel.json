@@ -4,6 +4,10 @@
   "outputDirectory": "dist",
   "routes": [
     {
+      "src": "/api/gas",
+      "dest": "api/gas.js"
+    },
+    {
       "src": "/gas/(.*)",
       "dest": "millet-mithai-backend/server.js/gas/$1"
     },

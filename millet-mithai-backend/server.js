@@ -18,8 +18,15 @@ app.use('/gas', createProxyMiddleware({
   changeOrigin: true,
   secure: true,
   pathRewrite: {'^/gas' : ''},
-  onProxyReq: (proxyReq, req, res) => {
-    // Forward all methods/headers/body
+  onProxyReq: (proxyReq, req) => {
+    proxyReq.method = req.method;
+    if (req.method === 'POST' && req.body) {
+      proxyReq.setHeader('Content-Type', 'application/json');
+      proxyReq.write(JSON.stringify(req.body));
+    }
+  },
+  onProxyRes: (proxyRes, req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 }));
 

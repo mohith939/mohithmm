@@ -25,7 +25,7 @@ const TrackOrder = () => {
     setOrders([]);
 
     try {
-const response = await fetch(`/api/gas?phone=${phone}`)
+const response = await fetch(`/gas?phone=${phone}`)
       const data = await response.json();
 
       if (data.success) {

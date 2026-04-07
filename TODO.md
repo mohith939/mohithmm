@@ -1,13 +1,13 @@
-# Task Progress: Fix Checkout.tsx Syntax Error (Issue #405 GAS Proxy)
+# Fix 405 POST /api/gas Error
 
-## Remaining Steps
-- [x] Step 1: Fix syntax error in src/pages/Checkout.tsx using create_file (overwrote with complete corrected file)
+## Implementation Steps
 
-- [x] Step 2: Test build with `npm run build` (✓ succeeded)
-- [x] Step 3: Deploy with `vercel deploy --prod` (✅ succeeded, https://milletmithai.in)
-- [ ] Step 4: Commit changes
-- [ ] Step 5: Push and create PR
-- [ ] Step 6: Update TODO files and complete
-
-Current branch: blackboxai/fix-405-gas
-
+### 1. [✅] Update api/gas.js - Enhance proxy for POST/GET/CORS
+### 2. [✅] Update vercel.json - Add explicit /api/gas → api/gas.js route  
+### 3. [✅] Update src/pages/Checkout.tsx - Change fetch('/api/gas') → fetch('/gas')
+### 4. [✅] Update src/pages/TrackOrder.tsx - Change fetch('/api/gas?phone=') → fetch('/gas?phone=')
+### 5. [✅] Update millet-mithai-backend/server.js - Ensure /gas proxy handles POST fully
+### 6. [✅] Test locally: npm run dev, test checkout/track
+### 7. [✅] Deploy: vercel --prod
+### 8. [ ] Verify production: https://milletmithai.in checkout/track order
+### 9. [ ] Mark complete ✅
