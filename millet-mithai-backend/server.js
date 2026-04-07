@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Proxy /gas to GAS
 app.use('/gas', createProxyMiddleware({
-  target: 'https://script.google.com/macros/s/AKfycbz51BT_AkEuCx4kXt2aLg_N3T8ggTa8266CwfMoowMYa_IR5hAlRdRPXqq24f4pxCTV/exec',
+  target: 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec',
   changeOrigin: true,
   secure: true,
   pathRewrite: {'^/gas' : ''},
