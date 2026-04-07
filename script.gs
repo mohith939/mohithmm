@@ -40,38 +40,6 @@ function handleRequest(e) {
       ordersSheet.getRange(1,1,1,10).setValues([['orderId','customerName','phone','address','items','totalAmount','orderStatus','paymentStatus','createdAt','status']]);
     }
     
-    // Add dropdown validation to status column if not exists
-    const statusRange = ordersSheet.getRange(2, 10, 1000, 1); // Rows 2-1000
-    const rule = SpreadsheetApp.newDataValidation()
-      .requireValueInList(['Order Placed','Payment Pending','Payment Recieved','Confirmed','Processing','Shipped','Out for Delivery','Delivered','Cancelled','Failed'], true)
-      .setAllowInvalid(false)
-      .build();
-    statusRange.setDataValidation(rule);
-    
-    // Color-coded conditional formatting
-    const statusColRange = ordersSheet.getRange(2, 10, 1000, 1);
-    const formats = [
-      { text: 'Order Placed', bg: '#FFF3CD', fg: '#856404' },
-      { text: 'Payment Pending', bg: '#FFFFCC', fg: '#DAA520' },
-      { text: 'Payment Recieved', bg: '#D4EDDA', fg: '#155724' },
-      { text: 'Confirmed', bg: '#D1ECF1', fg: '#0C5460' },
-      { text: 'Processing', bg: '#CCE5FF', fg: '#004085' },
-      { text: 'Shipped', bg: '#E2D9F3', fg: '#5C2D91' },
-      { text: 'Out for Delivery', bg: '#D1ECF1', fg: '#004085' },
-      { text: 'Delivered', bg: '#C3E6CB', fg: '#155724' },
-      { text: 'Cancelled', bg: '#F8D7DA', fg: '#721C24' },
-      { text: 'Failed', bg: '#F8D7DA', fg: '#721C24' }
-    ];
-    
-    const rules = formats.map(f => SpreadsheetApp.newConditionalFormatRule()
-      .whenTextEqualTo(f.text)
-      .setBackground(f.bg)
-      .setFontColor(f.fg)
-      .setRanges([statusColRange])
-      .build());
-    
-    ordersSheet.setConditionalFormatRules(rules);
-    
     // Generate sequential INV-1000
     const lastRow = ordersSheet.getLastRow();
     const nextNumber = lastRow > 1 ? (lastRow - 1 + 1000) : 1000;
@@ -98,15 +66,9 @@ function handleRequest(e) {
       body: 'New order from ' + (data.customerName || 'Customer') + '. Total: ₹' + (data.totalAmount || 0)
     });
     
-  return ContentService
+    return ContentService
       .createTextOutput(JSON.stringify({success: true, message: 'Order created', orderId: orderId}))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Max-Age': '86400'
-      });
+      .setMimeType(ContentService.MimeType.JSON);
       
   } catch (err) {
     return ContentService
@@ -122,14 +84,8 @@ function doGet(e) {
     const ordersSheet = ss.getSheetByName('Orders');
     
     if (!e.parameter.phone) {
-    return ContentService.createTextOutput(JSON.stringify({success: false, error: 'Phone required'}))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Max-Age': '86400'
-      });
+      return ContentService.createTextOutput(JSON.stringify({success: false, error: 'Phone required'}))
+        .setMimeType(ContentService.MimeType.JSON);
     }
     
     const phone = e.parameter.phone;
@@ -146,29 +102,16 @@ function doGet(e) {
           items: data[i][4],
           totalAmount: data[i][5],
           orderStatus: data[i][6],
-          paymentStatus: data[i][7],
-          status: data[i][9]
+          status: data[i][9] || data[i][6]
         });
       }
     }
     
     return ContentService.createTextOutput(JSON.stringify({success: true, orders}))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Max-Age': '86400'
-      });
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService.createTextOutput(JSON.stringify({success: false, error: err.toString()}))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Max-Age': '86400'
-      });
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -178,8 +121,9 @@ function setup() {
   
   if (!ss.getSheetByName('Orders')) {
     const ordersSheet = ss.insertSheet('Orders');
-    ordersSheet.getRange(1,1,1,9).setValues([['orderId','customerName','phone','address','items','totalAmount','orderStatus','paymentStatus','createdAt']]);
+    ordersSheet.getRange(1,1,1,10).setValues([['orderId','customerName','phone','address','items','totalAmount','orderStatus','paymentStatus','createdAt','status']]);
   }
   
   console.log('Setup complete');
 }
+
