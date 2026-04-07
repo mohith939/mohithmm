@@ -16,7 +16,7 @@ const TrackOrder = () => {
   const [error, setError] = useState("");
   const { toast } = useToast();
 
-const GAS_URL = import.meta.env.VITE_GAS_URL || 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby4zvKZizbhoG0LVbdcruQqOC_rSaEUIP_yLZPfqWDCqaZpbDGaMr5HKmo9l0LRQK4v4g/exec';
   
   const handleTrack = async (e) => {
     e.preventDefault();
