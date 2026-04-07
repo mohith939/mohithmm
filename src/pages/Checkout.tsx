@@ -51,7 +51,7 @@ const Checkout = () => {
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
 
-      const response = await fetch('/gas', {
+      const response = await fetch('/api/gas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -9,5 +9,5 @@
 ### 5. [✅] Update millet-mithai-backend/server.js - Ensure /gas proxy handles POST fully
 ### 6. [✅] Test locally: npm run dev, test checkout/track
 ### 7. [✅] Deploy: vercel --prod
-### 8. [ ] Verify production: https://milletmithai.in checkout/track order
-### 9. [ ] Mark complete ✅
+### 8. [✅] Verify production: https://milletmithai.in checkout/track order
+### 9. [✅] Mark complete ✅
