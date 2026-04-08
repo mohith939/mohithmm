@@ -1,0 +1,62 @@
+[
+  {
+    "id": "premix-foxtail",
+    "name": "Foxtail millet (korralu)",
+    "frontImage": "Foxtail millet (korralu) Front",
+    "backImage": "Foxtail millet (korralu) Back",
+    "price": "₹150",
+    "originalPrice": "₹199",
+    "weight": "500gms",
+    "description": "Ready-to-cook Foxtail Millet Idly & Dosa Premix. Just add water, ferment and make soft idlis or crispy dosas. Traditional Telugu taste with supergrain nutrition.",
+    "benefits": [
+      "No fermentation hassle",
+      "Ready in 10 minutes",
+      "Traditional Telugu flavors",
+      "Rich in protein & fiber"
+    ],
+    "ingredients": ["Foxtail Millet (Korralu)","Urad Dal","Methi Seeds","Salt"],
+    "howToUse": "Mix 1 cup premix + 1/2 cup water. Let rest 30 mins. Pour on hot tawa/griddle. Soft idlis or crispy dosas ready!",
+    "nutrition": {
+      "Protein": "12g",
+      "Fiber": "8g",
+      "Calories": "340kcal"
+    },
+    "tags": ["Instant Idly & Dosa Premix","Korralu","Ready to Cook"]
+  },
+  {
+    "id": "milk-sprouted-ragi",
+    "name": "Sprouted ragi",
+    "frontImage": "Sprouted ragi Front",
+    "backImage": "Sprouted ragi Back",
+    "price": "₹280",
+    "description": "Sprouted Ragi Milk Mix Powder - calcium-rich superfood for milkshakes, laddoos & healthy drinks. Probiotic live enzymes for better digestion.",
+    "benefits": [
+      "Highest plant calcium",
+      "Live enzymes for digestion",
+      "Bone health booster",
+      "Lactose-free milk alternative"
+    ],
+    "ingredients": ["Sprouted Ragi","Jaggery","Cardamom"],
+    "howToUse": "Mix 2 tbsp powder with 200ml milk/water. Perfect for laddoos, payasam or milkshakes.",
+    "nutrition": {
+      "Calcium": "450mg",
+      "Protein": "8g",
+      "Calories": "380kcal"
+    },
+    "tags": ["Millet Milk Mix","Sprouted Ragi","Calcium Rich"],
+    "variants": [
+      {
+        "sku": "half",
+        "price": "₹280",
+        "weight": "1/2 kg",
+        "originalPrice": "₹350"
+      },
+      {
+        "sku": "quarter",
+        "price": "₹140",
+        "weight": "1/4 kg",
+        "originalPrice": "₹175"
+      }
+    ]
+  }
+]

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { groupProductsByName } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ShoppingCart, Heart, Star, Wheat, List, Search } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -35,6 +36,8 @@ const Products = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const groupedProducts = groupProductsByName(filteredProducts);
+
   const handleAddToCart = (product) => {
     addItem({
       id: product.id,
@@ -44,7 +47,7 @@ const Products = () => {
     });
     toast({
       title: "Added to Cart",
-      description: `${product.name} (${product.weight}) added!`,
+      description: `${product.name} (${product.variants?.[0]?.weight || product.weight}) added!`,
     });
   };
 
@@ -91,7 +94,7 @@ const Products = () => {
                   </SelectContent>
                 </Select>
                 <div className="text-sm text-muted-foreground font-medium min-h-[58px] flex items-end pb-1">
-                  {filteredProducts.length} {filteredProducts.length === 1 ? 'result' : 'results'} found
+                  {groupedProducts.length} {groupedProducts.length === 1 ? 'result' : 'results'} found
                 </div>
               </div>
             </div>
@@ -102,7 +105,7 @@ const Products = () => {
       {/* Product Grid */}
       <section className="py-12 mb-12">
         <div className="container mx-auto px-4">
-          {filteredProducts.length === 0 ? (
+{groupedProducts.length === 0 ? (
             <div className="text-center py-32">
               <Wheat className="h-24 w-24 text-muted-foreground mx-auto mb-8 opacity-50 animate-pulse" />
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">No Products Found</h2>
@@ -133,12 +136,12 @@ const Products = () => {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-              {filteredProducts.map((product) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
+              {groupedProducts.map((product) => (
                 <Link 
                   key={product.id} 
-                  to={`/products/${product.id}`}
-                  className="group bg-card rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-border h-full flex flex-col hover:border-primary/30 ${product.variants ? 'ring-2 ring-accent/30' : ''}"
+                  to={`/products/${product.id.split('-')[0] || product.id}`}
+                  className="group bg-card rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-border h-full flex flex-col hover:border-primary/30 ring-2 ring-accent/30"
                 >
                   <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-muted to-background group-hover:from-muted/50">
                     <img 
@@ -151,7 +154,7 @@ const Products = () => {
                       {product.tags?.[0] || 'New'}
                     </div>
                   </div>
-                  <div className="p-8 flex flex-col flex-grow">
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
 
                     <h3 className="font-heading text-xl md:text-2xl font-bold text-foreground mb-6 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
                       {product.name}
@@ -161,13 +164,13 @@ const Products = () => {
                     </p>
                     <div className="flex items-center justify-between mb-6">
                       <div>
-                        <span className="text-2xl md:text-3xl font-bold text-primary block leading-tight">{product.price}</span>
-                        <span className="text-muted-foreground text-xs md:text-sm line-through block">{product.originalPrice}</span>
+                      <span className="text-xl md:text-2xl lg:text-3xl font-bold text-primary block leading-tight">{product.price}</span>
+                      <span className="text-muted-foreground text-xs md:text-sm line-through block">{product.originalPrice || product.variants?.[0]?.originalPrice}</span>
                       </div>
                       <span className="text-xs bg-accent/30 text-accent px-3 py-1.5 rounded-full font-semibold shadow-sm">
-                        {product.weight || product.variants?.[0]?.weight || 'N/A'}
+                        {product.variants?.[0]?.weight || product.weight || 'N/A'}
                       </span>
-                      {product.variants && (
+                      {product.variants && product.variants.length > 1 && (
                         <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full font-bold">
                           {product.variants.length} sizes
                         </span>

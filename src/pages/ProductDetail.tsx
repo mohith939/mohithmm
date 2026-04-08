@@ -1,6 +1,13 @@
 import { useParams, Link } from "react-router-dom";
+import { groupProductsByName, type GroupedProduct, type ProductVariant } from "@/lib/utils";
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem 
+} from "@/components/ui/carousel";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   ShoppingCart, ArrowLeft, Heart, Truck, ShieldCheck, Star, Minus, Plus, 
@@ -19,7 +26,7 @@ interface Variant {
   originalPrice?: string;
 }
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   frontImage: string;
@@ -41,30 +48,47 @@ const ProductDetail = () => {
   const { addItemWithQuantity } = useCart();
   const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState('front');
-  const [product, setProduct] = useState<Product | null>(null);
+
+const [product, setProduct] = useState<(Product | GroupedProduct) | null>(null);
   const [selectedVariant, setSelectedVariant] = useState(0);
 
   useEffect(() => {
     if (productId) {
-      const foundProduct = productsData.find((p: Product) => p.id === productId) as Product;
+      let foundProduct = productsData.find((p: any) => p.id === productId);
+      
+      // If no exact match or no variants, try to group by name or id prefix
+      if (!foundProduct || !foundProduct.variants || foundProduct.variants.length === 0) {
+        // Find all potential matches by name or id prefix
+        const baseName = productsData.find(p => p.id === productId)?.name;
+        const prefixMatches = productsData.filter((p: any) => 
+          p.id.startsWith(productId!) || p.name === baseName
+        );
+        if (prefixMatches.length > 1) {
+          const grouped = groupProductsByName(prefixMatches)[0];
+          foundProduct = grouped;
+        }
+      }
+      
       setProduct(foundProduct || null);
+      if (foundProduct?.variants) {
+        setSelectedVariant(0);
+      }
     }
   }, [productId]);
 
   const currentVariant = product?.variants ? product.variants[selectedVariant] : null;
-  const displayPrice = currentVariant ? currentVariant.price : product?.price || '₹0';
-  const displayWeight = currentVariant ? currentVariant.weight : product?.weight || 'N/A';
+  const displayPrice = currentVariant?.price || product?.price || '₹0';
+  const displayWeight = currentVariant?.weight || product?.weight || 'N/A';
 
   const handleAddToCart = async () => {
     if (!product) return;
     
-    const itemData = {
-      id: `${product.id}-${currentVariant?.sku || 'default'}`,
-      name: `${product.name} (${displayWeight})`,
-      image: `/${product.frontImage.replace(/ /g, '%20')}`,
-      price: displayPrice,
-    };
+      const itemData = {
+        id: `${productId}-${currentVariant?.sku || 'default'}`,
+        name: `${product.name} (${displayWeight})`,
+        image: `/${product.frontImage.replace(/ /g, '%20')}`,
+        price: displayPrice,
+      };
     
     await addItemWithQuantity(itemData, quantity);
     
@@ -104,7 +128,7 @@ const ProductDetail = () => {
       <Navbar />
 
       {/* Breadcrumb & Hero */}
-      <section className="pt-28 pb-20">
+      <section className="pt-20 pb-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <Link 
             to="/products" 
@@ -115,93 +139,72 @@ const ProductDetail = () => {
           </Link>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Images & Gallery */}
-            <div className="space-y-6">
-              {/* Main Image */}
-              <div className="bg-gradient-to-br from-card to-muted/30 rounded-3xl overflow-hidden shadow-2xl aspect-square relative group">
-                <img 
-                  src={`/${(selectedImage === 'front' ? product.frontImage : product.backImage).replace(/ /g, '%20')}`} 
-                  alt={`${product.name} ${selectedImage}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* Images & Gallery - Swipe Carousel */}
+              <div className="space-y-4">
+                <div className="w-full aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-card to-muted/30">
+                  <Carousel opts={{ align: 'start', loop: true }} className="w-full h-full">
+                    <CarouselContent className="-ml-4 md:-ml-6 h-full">
+                      <CarouselItem className="pl-4 md:pl-6 basis-full">
+                        <img 
+                          src={`/${product.frontImage.replace(/ /g, '%20')}`} 
+                          alt={product.name}
+                          className="w-full h-full object-cover rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
+                        />
+                      </CarouselItem>
+                      {product.backImage && (
+                        <CarouselItem className="pl-4 md:pl-6 basis-full">
+                          <img 
+                            src={`/${product.backImage.replace(/ /g, '%20')}`} 
+                            alt={`${product.name} back`}
+                            className="w-full h-full object-cover rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
+                          />
+                        </CarouselItem>
+                      )}
+                    </CarouselContent>
+                    <div className="flex w-full justify-center py-2 gap-2 mt-2">
+                      <div className="w-2 h-2 rounded-full bg-primary/50 hover:bg-primary cursor-pointer data-[active]:bg-primary data-[active]:w-4 data-[active]:h-4 transition-all duration-200" data-active="true" />
+                      {product.backImage && (
+                        <div className="w-2 h-2 rounded-full bg-primary/50 hover:bg-primary cursor-pointer data-[active]:bg-primary data-[active]:w-4 data-[active]:h-4 transition-all duration-200" data-active="false" />
+                      )}
+                    </div>
+                  </Carousel>
+                </div>
               </div>
-
-              {/* Thumbnails */}
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setSelectedImage('front')}
-                  className={`flex-1 p-2 rounded-2xl border-4 transition-all ${
-                    selectedImage === 'front' 
-                      ? 'border-primary shadow-2xl shadow-primary/25' 
-                      : 'border-border hover:border-accent'
-                  }`}
-                >
-                  <img 
-                    src={`/${product.frontImage}`} 
-                    alt="Front" 
-                    className="w-full h-24 object-cover rounded-xl"
-                  />
-                </button>
-                <button
-                  onClick={() => setSelectedImage('back')}
-                  className={`flex-1 p-2 rounded-2xl border-4 transition-all ${
-                    selectedImage === 'back' 
-                      ? 'border-primary shadow-2xl shadow-primary/25' 
-                      : 'border-border hover:border-accent'
-                  }`}
-                >
-                  <img 
-                    src={`/${product.backImage}`} 
-                    alt="Back" 
-                    className="w-full h-24 object-cover rounded-xl"
-                  />
-                </button>
-              </div>
-            </div>
 
             {/* Product Info */}
             <div className="lg:sticky lg:top-28 space-y-8">
               {/* Header */}
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-6 w-6 fill-primary stroke-primary" />
-                    ))}
-                  </div>
-                  <span className="text-primary font-bold">(258)</span>
-                </div>
-                <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
                   {product.name}
                 </h1>
-                <p className="text-sm text-muted-foreground font-medium mt-2">{displayWeight}</p>
+                <p className="text-sm md:text-base text-muted-foreground font-medium mt-2">{displayWeight}</p>
               </div>
 
               {/* Price */}
-              <div className="bg-gradient-to-r from-primary/5 to-accent/10 p-6 rounded-2xl border">
-                <div className="flex items-baseline gap-4">
-                  <span className="text-5xl font-bold text-primary">{displayPrice}</span>
-                  <span className="text-2xl text-muted-foreground line-through">{currentVariant?.originalPrice || product.originalPrice}</span>
-                  <span className="ml-auto bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-bold">
+              <div className="bg-gradient-to-r from-primary/5 to-accent/10 p-4 rounded-xl border">
+                <div className="flex flex-col sm:flex-row items-start sm:items-baseline gap-2 sm:gap-4">
+<span className="text-xl md:text-2xl lg:text-3xl font-bold text-primary">{displayPrice}</span>
+                  <span className="text-lg md:text-xl text-muted-foreground line-through">{currentVariant?.originalPrice || product.originalPrice}</span>
+                  <span className="bg-primary/20 text-primary px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold ml-auto sm:ml-0">
                     Save 20%
                   </span>
                 </div>
               </div>
 
               {/* SKU Selector */}
-              {product.variants && (
+              {product?.variants && product.variants.length > 1 && (
                 <div className="bg-muted/50 rounded-2xl p-6">
                   <span className="text-sm font-medium text-muted-foreground block mb-3">Select Size:</span>
                   <Select value={product.variants[selectedVariant]?.sku || ''} onValueChange={(value) => {
-                    const index = product.variants!.findIndex(v => v.sku === value);
+                    const index = product.variants.findIndex(v => v.sku === value);
                     setSelectedVariant(index);
                   }}>
                     <SelectTrigger className="w-full">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      {product.variants!.map((variant, index) => (
+                      {product.variants.map((variant, index) => (
                         <SelectItem key={variant.sku} value={variant.sku}>
                           <div className="flex items-center justify-between w-full">
                             <span>{variant.weight}</span>
@@ -215,10 +218,10 @@ const ProductDetail = () => {
               )}
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed text-lg">{product.description}</p>
+              <p className="text-muted-foreground leading-relaxed text-base">{product.description}</p>
 
               {/* Quantity Selector */}
-              <div className="bg-card rounded-2xl p-6 border shadow-lg">
+              <div className="bg-card rounded-xl p-4 border shadow-md">
                 <div className="flex items-center gap-4 mb-6">
                   <span className="text-foreground font-semibold text-lg">Quantity:</span>
                   <div className="flex items-center bg-background rounded-xl p-2 border shadow-sm min-w-[140px]">
@@ -226,44 +229,36 @@ const ProductDetail = () => {
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="h-12 w-12 rounded-xl p-0 border-accent/50 hover:bg-accent/50 -m-1"
+                      className="h-10 w-10 rounded-lg p-0 border-accent/50 hover:bg-accent/50 -m-0.5 flex-shrink-0"
                       disabled={quantity === 1}
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     >
-                      <Minus className="h-5 w-5" />
+                      <Minus className="h-4 w-4" />
                     </Button>
-                    <span className="px-6 py-3 text-2xl font-bold text-foreground min-w-[48px] text-center">
+                    <span className="px-4 py-2 text-xl font-bold text-foreground min-w-[40px] text-center">
                       {quantity}
                     </span>
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="h-12 w-12 rounded-xl p-0 border-accent/50 hover:bg-accent/50 -m-1"
+                      className="h-10 w-10 rounded-lg p-0 border-accent/50 hover:bg-accent/50 -m-0.5 flex-shrink-0"
                       onClick={() => setQuantity(quantity + 1)}
                     >
-                      <Plus className="h-5 w-5" />
+                      <Plus className="h-4 w-4" />
                     </Button>
                   </div>
-                  <span className="text-primary font-bold text-2xl">₹{(parseFloat(displayPrice.slice(1)) * quantity).toLocaleString()}</span>
+<span className="text-primary font-bold text-xl">₹{(parseFloat(displayPrice.slice(1)) * quantity).toLocaleString()}</span>
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <Button 
-                    className="w-full h-16 text-lg font-bold shadow-2xl hover:shadow-3xl bg-gradient-to-r from-primary to-primary/90 rounded-3xl gap-3" 
-                    size="lg"
+                    className="w-full h-14 text-base font-bold shadow-xl hover:shadow-2xl bg-gradient-to-r from-primary to-primary/90 rounded-2xl gap-2" 
                     onClick={handleAddToCart}
                   >
-                    <ShoppingCart className="h-6 w-6" />
+                    <ShoppingCart className="h-5 w-5" />
                     Add {quantity === 1 ? 'to' : `${quantity} to`} Cart
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-14 text-lg font-semibold rounded-2xl border-2 border-border hover:border-primary hover:bg-primary/5"
-                  >
-                    <Heart className="h-5 w-5 mr-2" />
-                    Add to Wishlist
                   </Button>
                 </div>
               </div>

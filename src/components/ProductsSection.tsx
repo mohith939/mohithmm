@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { groupProductsByName } from "@/lib/utils";
 import { ShoppingCart, Minus, Plus, Heart, Star, BadgeCheck, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
@@ -9,7 +10,8 @@ const ProductsSection = () => {
   const { addItemWithQuantity } = useCart();
   const [quantities, setQuantities] = useState({});
 
-  const featuredProducts = productsData.slice(0, 3);
+  const groupedProducts = groupProductsByName(productsData);
+  const featuredProducts = groupedProducts.slice(0, 3);
 
   const handleAddToCart = async (product, qty) => {
     await addItemWithQuantity({
@@ -47,7 +49,7 @@ const ProductsSection = () => {
             return (
               <div key={product.id} className="bg-white rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-3 border border-[#274d35]/10 overflow-hidden group/card">
                 <div className="h-64 relative overflow-hidden">
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/products/${product.id.split('-')[0] || product.id}`}>
                     <img 
                       src={`/${product.frontImage.replace(/ /g, '%20')}`} 
                       alt={product.name}
@@ -62,8 +64,8 @@ const ProductsSection = () => {
                   </button>
                 </div>
 
-                <div className="p-8">
-                  <Link to={`/product/${product.id}`}>
+                <div className="p-6 md:p-8">
+                  <Link to={`/products/${product.id.split('-')[0] || product.id}`}>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-[#274d35] transition-colors line-clamp-1">
                       {product.name}
                     </h3>
@@ -73,12 +75,12 @@ const ProductsSection = () => {
                   </p>
                   
                   <div className="flex items-baseline mb-8">
-                    <span className="text-4xl font-black bg-gradient-to-r from-[#274d35] to-emerald-600 bg-clip-text text-transparent mr-3">{product.price}</span>
-                    <span className="text-sm text-gray-500 uppercase tracking-wider font-medium">per {product.weight}</span>
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-black bg-gradient-to-r from-[#274d35] to-emerald-600 bg-clip-text text-transparent mr-3">{product.price}</span>
+                    <span className="text-xs md:text-sm text-gray-500 uppercase tracking-wider font-medium">per {product.variants?.[0]?.weight || product.weight}</span>
                   </div>
 
                   {/* Compact Mobile-Friendly Stepper */}
-                  <div className="flex items-stretch mb-8 bg-gray-50 rounded-2xl p-1.5 border-2 border-gray-200 shadow-inner">
+                  <div className="flex items-stretch mb-6 md:mb-8 bg-gray-50 rounded-xl md:rounded-2xl p-1 md:p-1.5 border-2 border-gray-200 shadow-inner">
                     <Button
                       type="button"
                       variant="ghost"

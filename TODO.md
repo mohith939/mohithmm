@@ -1,9 +1,23 @@
-# Task Progress: Single Product with Multiple SKUs
+# ProductDetail - Ultra Compact Mode
+
+## ✅ Dots + Sizing v1 Complete
+## 🔄 v2: Maximum Compact (smallest fonts/padding)
+
+**Approved:** Further reduce fonts/padding on price/quantity/description/name
+
+## Changes Planned:
+| Element | Current | Ultra Compact |
+|---------|---------|---------------|
+| Product name | `3xl md:4xl lg:5xl` | `2xl md:3xl lg:4xl` |
+| Price | `2xl md:3xl lg:4xl` | `xl md:2xl lg:3xl` |
+| Price container | `p-6` | `p-4` |
+| Quantity container | `p-6` | `p-4` |
+| Total price | `text-2xl` | `text-xl` |
+| Description | `text-lg` | `text-base` |
 
 ## Steps:
-1. [x] Previous products page updates
-2. [x] Refactor products.json: Group multi-SKU products into variants array (started with Sprouted ragi)
-3. [x] Update Products.tsx: Show main product + SKU badge (accent ring + sizes badge)
-4. [x] Update ProductDetail.tsx: Add SKU selector (Select dropdown + dynamic price/weight)
-5. [x] Update CartContext.tsx: Include variant/sku in cart item
-6. [x] Test and complete
+- [x] 1. Plan + TODO  
+- [x] 2. Edit ProductDetail.tsx (ultra compact)
+- [x] 3. Final test
+
+# ✅ PERFECT - Top spacing reduced (pt-20), ultra compact complete!
