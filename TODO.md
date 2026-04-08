@@ -1,13 +1,9 @@
-# Fix 405 POST /api/gas Error
+# Task Progress: Single Product with Multiple SKUs
 
-## Implementation Steps
-
-### 1. [✅] Update api/gas.js - Enhance proxy for POST/GET/CORS
-### 2. [✅] Update vercel.json - Add explicit /api/gas → api/gas.js route  
-### 3. [✅] Update src/pages/Checkout.tsx - Change fetch('/api/gas') → fetch('/gas')
-### 4. [✅] Update src/pages/TrackOrder.tsx - Change fetch('/api/gas?phone=') → fetch('/gas?phone=')
-### 5. [✅] Update millet-mithai-backend/server.js - Ensure /gas proxy handles POST fully
-### 6. [✅] Test locally: npm run dev, test checkout/track
-### 7. [✅] Deploy: vercel --prod
-### 8. [✅] Verify production: https://milletmithai.in checkout/track order
-### 9. [✅] Mark complete ✅
+## Steps:
+1. [x] Previous products page updates
+2. [x] Refactor products.json: Group multi-SKU products into variants array (started with Sprouted ragi)
+3. [x] Update Products.tsx: Show main product + SKU badge (accent ring + sizes badge)
+4. [x] Update ProductDetail.tsx: Add SKU selector (Select dropdown + dynamic price/weight)
+5. [x] Update CartContext.tsx: Include variant/sku in cart item
+6. [x] Test and complete

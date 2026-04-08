@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   ShoppingCart, ArrowLeft, Heart, Truck, ShieldCheck, Star, Minus, Plus, 
   Clock, Dumbbell, Leaf, Award 
@@ -11,20 +12,28 @@ import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import productsData from "../products.json";
 
+interface Variant {
+  sku: string;
+  price: string;
+  weight: string;
+  originalPrice?: string;
+}
+
 interface Product {
   id: string;
   name: string;
   frontImage: string;
   backImage: string;
-  price: string;
-  originalPrice: string;
-  weight: string;
+  price?: string;
+  originalPrice?: string;
+  weight?: string;
   description: string;
   benefits: string[];
   ingredients: string[];
   howToUse: string;
   nutrition: Record<string, string>;
   tags: string[];
+  variants?: Variant[];
 }
 
 const ProductDetail = () => {
@@ -34,6 +43,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState('front');
   const [product, setProduct] = useState<Product | null>(null);
+  const [selectedVariant, setSelectedVariant] = useState(0);
 
   useEffect(() => {
     if (productId) {
@@ -42,20 +52,25 @@ const ProductDetail = () => {
     }
   }, [productId]);
 
+  const currentVariant = product?.variants ? product.variants[selectedVariant] : null;
+  const displayPrice = currentVariant ? currentVariant.price : product?.price || '₹0';
+  const displayWeight = currentVariant ? currentVariant.weight : product?.weight || 'N/A';
+
   const handleAddToCart = async () => {
     if (!product) return;
     
-    await addItemWithQuantity({
-      id: product.id,
-      name: product.name,
+    const itemData = {
+      id: `${product.id}-${currentVariant?.sku || 'default'}`,
+      name: `${product.name} (${displayWeight})`,
       image: `/${product.frontImage.replace(/ /g, '%20')}`,
-      price: product.price,
-       // weight: product.weight
-    }, quantity);
+      price: displayPrice,
+    };
+    
+    await addItemWithQuantity(itemData, quantity);
     
     toast({
       title: "Added to Cart!",
-      description: `${quantity}x ${product.name} (${product.weight})`,
+      description: `${quantity}x ${product.name} (${displayWeight})`,
     });
   };
 
@@ -105,7 +120,7 @@ const ProductDetail = () => {
               {/* Main Image */}
               <div className="bg-gradient-to-br from-card to-muted/30 rounded-3xl overflow-hidden shadow-2xl aspect-square relative group">
                 <img 
-                  src={`/${selectedImage === 'front' ? product.frontImage : product.backImage}`} 
+                  src={`/${(selectedImage === 'front' ? product.frontImage : product.backImage).replace(/ /g, '%20')}`} 
                   alt={`${product.name} ${selectedImage}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-100"
                 />
@@ -160,19 +175,44 @@ const ProductDetail = () => {
                 <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground leading-tight">
                   {product.name}
                 </h1>
-                <p className="text-sm text-muted-foreground font-medium mt-2">{product.weight}</p>
+                <p className="text-sm text-muted-foreground font-medium mt-2">{displayWeight}</p>
               </div>
 
               {/* Price */}
               <div className="bg-gradient-to-r from-primary/5 to-accent/10 p-6 rounded-2xl border">
                 <div className="flex items-baseline gap-4">
-                  <span className="text-5xl font-bold text-primary">{product.price}</span>
-                  <span className="text-2xl text-muted-foreground line-through">{product.originalPrice}</span>
+                  <span className="text-5xl font-bold text-primary">{displayPrice}</span>
+                  <span className="text-2xl text-muted-foreground line-through">{currentVariant?.originalPrice || product.originalPrice}</span>
                   <span className="ml-auto bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-bold">
-                    Save 33%
+                    Save 20%
                   </span>
                 </div>
               </div>
+
+              {/* SKU Selector */}
+              {product.variants && (
+                <div className="bg-muted/50 rounded-2xl p-6">
+                  <span className="text-sm font-medium text-muted-foreground block mb-3">Select Size:</span>
+                  <Select value={product.variants[selectedVariant]?.sku || ''} onValueChange={(value) => {
+                    const index = product.variants!.findIndex(v => v.sku === value);
+                    setSelectedVariant(index);
+                  }}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {product.variants!.map((variant, index) => (
+                        <SelectItem key={variant.sku} value={variant.sku}>
+                          <div className="flex items-center justify-between w-full">
+                            <span>{variant.weight}</span>
+                            <span className="font-bold">{variant.price}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
 
               {/* Description */}
               <p className="text-muted-foreground leading-relaxed text-lg">{product.description}</p>
@@ -205,7 +245,7 @@ const ProductDetail = () => {
                       <Plus className="h-5 w-5" />
                     </Button>
                   </div>
-                  <span className="text-primary font-bold text-2xl">₹{(parseFloat(product.price.slice(1)) * quantity).toLocaleString()}</span>
+                  <span className="text-primary font-bold text-2xl">₹{(parseFloat(displayPrice.slice(1)) * quantity).toLocaleString()}</span>
                 </div>
 
                 {/* CTA Buttons */}

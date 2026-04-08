@@ -1,1 +1,495 @@
-[{"id":"browntop-millet","name":"Browntop Millet","frontImage":"Browntop Millet Front.jpeg","backImage":"Browntop Millet Back.jpeg","price":"₹199","originalPrice":"₹299","weight":"500g","description":"Premium Browntop Millet for healthy cooking. Gluten-free, high fiber.","benefits":["Rich in antioxidants","Supports digestion","Gluten-free grain"],"ingredients":["Browntop Millet"],"howToUse":"Rinse and cook 1:3 ratio with water for 20 mins. Perfect for upma, dosa.","nutrition":{"Protein":"11g","Fiber":"9g","Calories":"350kcal"},"tags":["Gluten Free","High Fiber"]},{"id":"brown-millet","name":"Brown Millet","frontImage":"Brown Millet Front.jpeg","backImage":"Brown Millet Back.jpeg","price":"₹179","originalPrice":"₹249","weight":"500g","description":"Nutritious Brown Millet perfect for daily meals.","benefits":["Heart healthy","Blood sugar control","High mineral content"],"ingredients":["Brown Millet"],"howToUse":"Soak overnight, pressure cook. Use in khichdi, porridge.","nutrition":{"Protein":"10g","Fiber":"8g","Calories":"340kcal"},"tags":["Diabetes Friendly","Organic"]},{"id":"barnyard-millet","name":"Barnyard Millet","frontImage":"Barnyard Millet Front.jpeg","backImage":"Barnyard Millet Back.jpeg","price":"₹189","originalPrice":"₹259","weight":"500g","description":"Fasting-friendly Barnyard Millet with complete nutrition.","benefits":["Ideal for fasting","Low glycemic index","Weight management"],"ingredients":["Barnyard Millet"],"howToUse":"Cook like rice. Perfect for vrat recipes.","nutrition":{"Protein":"11.5g","Fiber":"10g","Calories":"320kcal"},"tags":["Fasting","Low GI"]},{"id":"finger-millet","name":"Finger Millet (Ragi)","frontImage":"Finger Millet Front.jpeg","backImage":"Finger Millet Back.jpeg","price":"₹169","originalPrice":"₹229","weight":"500g","description":"Calcium-rich Ragi for strong bones and teeth.","benefits":["Highest calcium content","Bone health","Lactose-free milk alternative"],"ingredients":["Finger Millet"],"howToUse":"Make ragi malt, rotis, porridge. Ferment for better digestion.","nutrition":{"Calcium":"344mg","Protein":"7g","Fiber":"3.6g"},"tags":["Calcium Rich","Baby Food"]},{"id":"foxtail-millet","name":"Foxtail Millet","frontImage":"Foxtail Millet Front.jpeg","backImage":"Foxtail Millet Back.jpeg","price":"₹199","originalPrice":"₹279","weight":"500g","description":"Ancient grain Foxtail Millet for sustained energy.","benefits":["Endurance building","Thyroid support","Easy digestion"],"ingredients":["Foxtail Millet"],"howToUse":"Replace rice in pulao, biryani, upma.","nutrition":{"Protein":"12g","Iron":"3mg","Calories":"351kcal"},"tags":["Energy Booster","Ancient Grain"]},{"id":"jowar-millet","name":"Jowar Millet (Sorghum)","frontImage":"Jowar Millet Front.jpeg","backImage":"Jowar Millet Back.jpeg","price":"₹159","originalPrice":"₹219","weight":"500g","description":"Protein-packed Jowar for muscle building.","benefits":["Complete protein","Gluten-free","Weight loss friendly"],"ingredients":["Jowar Millet"],"howToUse":"Bhakri, rotis, porridge. Pop for healthy snack.","nutrition":{"Protein":"11g","Fiber":"6.7g","Calories":"329kcal"},"tags":["Protein Rich","Weight Loss"]},{"id":"kodo-millet","name":"Kodo Millet","frontImage":"Kodo Millet Front.jpeg","backImage":"Kodo Millet Back.jpeg","price":"₹179","originalPrice":"₹249","weight":"500g","description":"Migraine-relieving Kodo Millet with medicinal properties.","benefits":["Migraine relief","Detox properties","Blood purification"],"ingredients":["Kodo Millet"],"howToUse":"Idli, dosa batter. Medicinal rice substitute.","nutrition":{"Protein":"8.3g","Carbs":"65g","Calories":"321kcal"},"tags":["Medicinal","Detox"]},{"id":"little-millet","name":"Little Millet","frontImage":"Little Millet Front.jpeg","backImage":"Little Millet Back.jpeg","price":"₹189","originalPrice":"₹269","weight":"500g","description":"Tiny but mighty Little Millet for complete nutrition.","benefits":["High antioxidants","Anti-diabetic","Easy to cook"],"ingredients":["Little Millet"],"howToUse":"Quick cooking like rice. Perfect for busy days.","nutrition":{"Protein":"9.7g","Fiber":"7.6g","Calories":"207kcal"},"tags":["Antioxidant","Quick Cook"]},{"id":"pearl-millet","name":"Pearl Millet (Bajra)","frontImage":"Pearl Millet Front.jpeg","backImage":"Pearl Millet Back.jpeg","price":"₹149","originalPrice":"₹199","weight":"500g","description":"Winter superfood Pearl Millet for warmth and energy.","benefits":["Heat generating","Respiratory health","High energy"],"ingredients":["Pearl Millet"],"howToUse":"Khichdi, rotla, porridge. Winter favorite.","nutrition":{"Protein":"11.6g","Iron":"8mg","Calories":"361kcal"},"tags":["Winter Food","Iron Rich"]}]
+[
+  {
+    "id": "premix-foxtail",
+    "name": "Foxtail millet (korralu)",
+    "frontImage": "Foxtail millet (korralu) Front",
+    "backImage": "Foxtail millet (korralu) Back",
+    "price": "₹150",
+    "originalPrice": "₹199",
+    "weight": "500gms",
+    "description": "Ready-to-cook Foxtail Millet Idly & Dosa Premix. Just add water, ferment and make soft idlis or crispy dosas. Traditional Telugu taste with supergrain nutrition.",
+    "benefits": [
+      "No fermentation hassle", 
+      "Ready in 10 minutes",
+      "Traditional Telugu flavors",
+      "Rich in protein & fiber"
+    ],
+    "ingredients": ["Foxtail Millet (Korralu)", "Urad Dal", "Methi Seeds", "Salt"],
+    "howToUse": "Mix 1 cup premix + 1/2 cup water. Let rest 30 mins. Pour on hot tawa/griddle. Soft idlis or crispy dosas ready!",
+    "nutrition": {
+      "Protein": "12g",
+      "Fiber": "8g",
+      "Calories": "340kcal"
+    },
+    "tags": ["Instant Idly & Dosa Premix", "Korralu", "Ready to Cook"]
+  },
+  {
+    "id": "milk-sprouted-ragi",
+    "name": "Sprouted ragi",
+    "frontImage": "Sprouted ragi Front",
+    "backImage": "Sprouted ragi Back",
+    "price": "₹280",
+    "description": "Sprouted Ragi Milk Mix Powder - calcium-rich superfood for milkshakes, laddoos & healthy drinks. Probiotic live enzymes for better digestion.",
+    "benefits": [
+      "Highest plant calcium", 
+      "Live enzymes for digestion",
+      "Bone health booster",
+      "Lactose-free milk alternative"
+    ],
+    "ingredients": ["Sprouted Ragi", "Jaggery", "Cardamom"],
+    "howToUse": "Mix 2 tbsp powder with 200ml milk/water. Perfect for laddoos, payasam or milkshakes.",
+    "nutrition": {
+      "Calcium": "450mg",
+      "Protein": "8g",
+      "Calories": "380kcal"
+    },
+    "tags": ["Millet Milk Mix", "Sprouted Ragi", "Calcium Rich"],
+    "variants": [
+      {
+        "sku": "half",
+        "price": "₹280",
+        "weight": "1/2 kg",
+        "originalPrice": "₹350"
+      },
+      {
+        "sku": "quarter", 
+        "price": "₹140",
+        "weight": "1/4 kg",
+        "originalPrice": "₹175"
+      }
+    ]
+  },
+  {
+    "id": "milk-sprouted-jowar-half",
+    "name": "Sprouted jowar",
+    "frontImage": "Sprouted jowar Front",
+    "backImage": "Sprouted jowar Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Sprouted Jowar Milk Mix Powder - protein-packed for muscle building milkshakes and healthy sweets.",
+    "benefits": [
+      "Complete plant protein",
+      "Muscle building",
+      "Weight management",
+      "Gluten-free"
+    ],
+    "ingredients": ["Sprouted Jowar", "Jaggery", "Cardamom"],
+    "howToUse": "Blend with milk for high-protein shakes or make nutritious laddoos.",
+    "nutrition": {
+      "Protein": "14g",
+      "Fiber": "7g",
+      "Calories": "370kcal"
+    },
+    "tags": ["Millet Milk Mix", "Sprouted Jowar", "Protein Rich"]
+  },
+  {
+    "id": "milk-sprouted-jowar-quarter",
+    "name": "Sprouted jowar",
+    "frontImage": "Sprouted jowar Front",
+    "backImage": "Sprouted jowar Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Sprouted Jowar Milk Mix Powder - protein-packed for muscle building milkshakes and healthy sweets.",
+    "benefits": [
+      "Complete plant protein",
+      "Muscle building",
+      "Weight management",
+      "Gluten-free"
+    ],
+    "ingredients": ["Sprouted Jowar", "Jaggery", "Cardamom"],
+    "howToUse": "Blend with milk for high-protein shakes or make nutritious laddoos.",
+    "nutrition": {
+      "Protein": "14g",
+      "Fiber": "7g",
+      "Calories": "370kcal"
+    },
+    "tags": ["Millet Milk Mix", "Sprouted Jowar", "Protein Rich"]
+  },
+  {
+    "id": "milk-coco-half",
+    "name": "Coco powder",
+    "frontImage": "Coco powder Front",
+    "backImage": "Coco powder Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Pure Cocoa Powder for chocolate millet milkshakes and desserts. Rich antioxidants without sugar.",
+    "benefits": [
+      "Antioxidant powerhouse",
+      "Mood booster",
+      "Heart healthy flavonoids",
+      "Low calorie indulgence"
+    ],
+    "ingredients": ["Pure Cocoa Powder", "Jaggery"],
+    "howToUse": "2 tbsp cocoa + 2 tbsp milk mix + 200ml milk = perfect chocolate shake.",
+    "nutrition": {
+      "Antioxidants": "High",
+      "Calories": "400kcal",
+      "Fiber": "12g"
+    },
+    "tags": ["Millet Milk Mix", "Cocoa", "Chocolate"]
+  },
+  {
+    "id": "milk-coco-quarter",
+    "name": "Coco powder",
+    "frontImage": "Coco powder Front",
+    "backImage": "Coco powder Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Pure Cocoa Powder for chocolate millet milkshakes and desserts. Rich antioxidants without sugar.",
+    "benefits": [
+      "Antioxidant powerhouse",
+      "Mood booster",
+      "Heart healthy flavonoids",
+      "Low calorie indulgence"
+    ],
+    "ingredients": ["Pure Cocoa Powder", "Jaggery"],
+    "howToUse": "2 tbsp cocoa + 2 tbsp milk mix + 200ml milk = perfect chocolate shake.",
+    "nutrition": {
+      "Antioxidants": "High",
+      "Calories": "400kcal",
+      "Fiber": "12g"
+    },
+    "tags": ["Millet Milk Mix", "Cocoa", "Chocolate"]
+  },
+  {
+    "id": "milk-drydates-half",
+    "name": "Dry dates powder",
+    "frontImage": "Dry dates powder Front",
+    "backImage": "Dry dates powder Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Dry Dates Powder - natural sweetener with iron for energy-boosting milk mixes.",
+    "benefits": [
+      "Natural iron source",
+      "Energy without crash",
+      "Digestive health",
+      "Natural sweetness"
+    ],
+    "ingredients": ["Dry Dates Powder", "Cardamom"],
+    "howToUse": "Perfect for energy drinks, laddoos and healthy kheer.",
+    "nutrition": {
+      "Iron": "5mg",
+      "Calories": "390kcal",
+      "Fiber": "9g"
+    },
+    "tags": ["Millet Milk Mix", "Dates", "Natural Sweetener"]
+  },
+  {
+    "id": "milk-drydates-quarter",
+    "name": "Dry dates powder",
+    "frontImage": "Dry dates powder Front",
+    "backImage": "Dry dates powder Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Dry Dates Powder - natural sweetener with iron for energy-boosting milk mixes.",
+    "benefits": [
+      "Natural iron source",
+      "Energy without crash",
+      "Digestive health",
+      "Natural sweetness"
+    ],
+    "ingredients": ["Dry Dates Powder", "Cardamom"],
+    "howToUse": "Perfect for energy drinks, laddoos and healthy kheer.",
+    "nutrition": {
+      "Iron": "5mg",
+      "Calories": "390kcal",
+      "Fiber": "9g"
+    },
+    "tags": ["Millet Milk Mix", "Dates", "Natural Sweetener"]
+  },
+  {
+    "id": "milk-makhana-half",
+    "name": "Makhana",
+    "frontImage": "Makhana Front",
+    "backImage": "Makhana Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Premium Makhana (Foxnuts) for protein-rich milk mixes and healthy kheer.",
+    "benefits": [
+      "Fasting friendly",
+      "High protein snack",
+      "Low calorie",
+      "Weight loss aid"
+    ],
+    "ingredients": ["Premium Makhana", "Jaggery Powder"],
+    "howToUse": "Roast lightly and blend with milk mix for creamy kheer.",
+    "nutrition": {
+      "Protein": "10g",
+      "Calories": "350kcal",
+      "Fat": "1g"
+    },
+    "tags": ["Millet Milk Mix", "Makhana", "Fasting"]
+  },
+  {
+    "id": "milk-makhana-quarter",
+    "name": "Makhana",
+    "frontImage": "Makhana Front",
+    "backImage": "Makhana Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Premium Makhana (Foxnuts) for protein-rich milk mixes and healthy kheer.",
+    "benefits": [
+      "Fasting friendly",
+      "High protein snack",
+      "Low calorie",
+      "Weight loss aid"
+    ],
+    "ingredients": ["Premium Makhana", "Jaggery Powder"],
+    "howToUse": "Roast lightly and blend with milk mix for creamy kheer.",
+    "nutrition": {
+      "Protein": "10g",
+      "Calories": "350kcal",
+      "Fat": "1g"
+    },
+    "tags": ["Millet Milk Mix", "Makhana", "Fasting"]
+  },
+  {
+    "id": "milk-oats-half",
+    "name": "Oats",
+    "frontImage": "Oats Front",
+    "backImage": "Oats Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Rolled Oats Milk Mix Powder for creamy oatmeal milkshakes and porridge.",
+    "benefits": [
+      "Beta-glucan for cholesterol",
+      "Heart healthy",
+      "Satiety & weight control",
+      "Blood sugar stable"
+    ],
+    "ingredients": ["Rolled Oats", "Jaggery", "Cardamom"],
+    "howToUse": "Hot or cold milkshakes, overnight oats, or traditional porridge.",
+    "nutrition": {
+      "Beta-Glucan": "High",
+      "Fiber": "11g",
+      "Calories": "360kcal"
+    },
+    "tags": ["Millet Milk Mix", "Oats", "Heart Healthy"]
+  },
+  {
+    "id": "milk-oats-quarter",
+    "name": "Oats",
+    "frontImage": "Oats Front",
+    "backImage": "Oats Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Rolled Oats Milk Mix Powder for creamy oatmeal milkshakes and porridge.",
+    "benefits": [
+      "Beta-glucan for cholesterol",
+      "Heart healthy",
+      "Satiety & weight control",
+      "Blood sugar stable"
+    ],
+    "ingredients": ["Rolled Oats", "Jaggery", "Cardamom"],
+    "howToUse": "Hot or cold milkshakes, overnight oats, or traditional porridge.",
+    "nutrition": {
+      "Beta-Glucan": "High",
+      "Fiber": "11g",
+      "Calories": "360kcal"
+    },
+    "tags": ["Millet Milk Mix", "Oats", "Heart Healthy"]
+  },
+  {
+    "id": "milk-almond-half",
+    "name": "Almond",
+    "frontImage": "Almond Front",
+    "backImage": "Almond Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "California Almond Milk Mix Powder for creamy badam milk and desserts.",
+    "benefits": [
+      "Vitamin E rich",
+      "Heart healthy fats",
+      "Brain booster",
+      "Skin health"
+    ],
+    "ingredients": ["California Almonds", "Jaggery", "Cardamom", "Saffron"],
+    "howToUse": "Blend with warm milk for premium badam milk experience.",
+    "nutrition": {
+      "Vitamin E": "High",
+      "Healthy Fat": "50g",
+      "Calories": "410kcal"
+    },
+    "tags": ["Millet Milk Mix", "Almond", "Badam Milk"]
+  },
+  {
+    "id": "milk-almond-quarter",
+    "name": "Almond",
+    "frontImage": "Almond Front",
+    "backImage": "Almond Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "California Almond Milk Mix Powder for creamy badam milk and desserts.",
+    "benefits": [
+      "Vitamin E rich",
+      "Heart healthy fats",
+      "Brain booster",
+      "Skin health"
+    ],
+    "ingredients": ["California Almonds", "Jaggery", "Cardamom", "Saffron"],
+    "howToUse": "Blend with warm milk for premium badam milk experience.",
+    "nutrition": {
+      "Vitamin E": "High",
+      "Healthy Fat": "50g",
+      "Calories": "410kcal"
+    },
+    "tags": ["Millet Milk Mix", "Almond", "Badam Milk"]
+  },
+  {
+    "id": "milk-cashew-half",
+    "name": "Cashew",
+    "frontImage": "Cashew Front",
+    "backImage": "Cashew Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Premium Cashew Milk Mix Powder for rich kaju milk and mithai bases.",
+    "benefits": [
+      "Creamy texture",
+      "Heart healthy fats",
+      "Magnesium source",
+      "Luxury nutrition"
+    ],
+    "ingredients": ["Premium Cashews", "Jaggery", "Cardamom"],
+    "howToUse": "Rich milkshakes, kaju katli base, or creamy payasam.",
+    "nutrition": {
+      "Magnesium": "High",
+      "Fat": "45g",
+      "Calories": "420kcal"
+    },
+    "tags": ["Millet Milk Mix", "Cashew", "Premium"]
+  },
+  {
+    "id": "milk-cashew-quarter",
+    "name": "Cashew",
+    "frontImage": "Cashew Front",
+    "backImage": "Cashew Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Premium Cashew Milk Mix Powder for rich kaju milk and mithai bases.",
+    "benefits": [
+      "Creamy texture",
+      "Heart healthy fats",
+      "Magnesium source",
+      "Luxury nutrition"
+    ],
+    "ingredients": ["Premium Cashews", "Jaggery", "Cardamom"],
+    "howToUse": "Rich milkshakes, kaju katli base, or creamy payasam.",
+    "nutrition": {
+      "Magnesium": "High",
+      "Fat": "45g",
+      "Calories": "420kcal"
+    },
+    "tags": ["Millet Milk Mix", "Cashew", "Premium"]
+  },
+  {
+    "id": "milk-pistachio-half",
+    "name": "Pistha",
+    "frontImage": "Pistha Front",
+    "backImage": "Pistha Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Premium Pistachio Milk Mix Powder for luxurious pista milkshakes and desserts.",
+    "benefits": [
+      "Antioxidant pistachios",
+      "Heart protective",
+      "Potassium rich",
+      "Luxury indulgence"
+    ],
+    "ingredients": ["Premium Pistachios", "Jaggery", "Cardamom", "Saffron"],
+    "howToUse": "Ultra-premium pista milk or sophisticated desserts.",
+    "nutrition": {
+      "Potassium": "High",
+      "Fat": "48g",
+      "Calories": "430kcal"
+    },
+    "tags": ["Millet Milk Mix", "Pistachio", "Luxury"]
+  },
+  {
+    "id": "milk-pistachio-quarter",
+    "name": "Pistha",
+    "frontImage": "Pistha Front",
+    "backImage": "Pistha Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Premium Pistachio Milk Mix Powder for luxurious pista milkshakes and desserts.",
+    "benefits": [
+      "Antioxidant pistachios",
+      "Heart protective",
+      "Potassium rich",
+      "Luxury indulgence"
+    ],
+    "ingredients": ["Premium Pistachios", "Jaggery", "Cardamom", "Saffron"],
+    "howToUse": "Ultra-premium pista milk or sophisticated desserts.",
+    "nutrition": {
+      "Potassium": "High",
+      "Fat": "48g",
+      "Calories": "430kcal"
+    },
+    "tags": ["Millet Milk Mix", "Pistachio", "Luxury"]
+  },
+  {
+    "id": "milk-jaggery-half",
+    "name": "Jaggery",
+    "frontImage": "Jaggery Front",
+    "backImage": "Jaggery Back",
+    "price": "₹280",
+    "originalPrice": "₹350",
+    "weight": "1/2 kg",
+    "description": "Organic Jaggery Powder - traditional healthy sweetener for millet milk mixes.",
+    "benefits": [
+      "Iron rich",
+      "Mineral complete",
+      "No chemical processing",
+      "Digestive aid"
+    ],
+    "ingredients": ["Organic Jaggery"],
+    "howToUse": "Natural sweetener for all milk mixes, laddoos and healthy sweets.",
+    "nutrition": {
+      "Iron": "11mg",
+      "Minerals": "Rich",
+      "Calories": "390kcal"
+    },
+    "tags": ["Millet Milk Mix", "Jaggery", "Organic Sweetener"]
+  },
+  {
+    "id": "milk-jaggery-quarter",
+    "name": "Jaggery",
+    "frontImage": "Jaggery Front",
+    "backImage": "Jaggery Back",
+    "price": "₹140",
+    "originalPrice": "₹175",
+    "weight": "1/4 kg",
+    "description": "Organic Jaggery Powder - traditional healthy sweetener for millet milk mixes.",
+    "benefits": [
+      "Iron rich",
+      "Mineral complete",
+      "No chemical processing",
+      "Digestive aid"
+    ],
+    "ingredients": ["Organic Jaggery"],
+    "howToUse": "Natural sweetener for all milk mixes, laddoos and healthy sweets.",
+    "nutrition": {
+      "Iron": "11mg",
+      "Minerals": "Rich",
+      "Calories": "390kcal"
+    },
+    "tags": ["Millet Milk Mix", "Jaggery", "Organic Sweetener"]
+  },
+  {"id":"browntop-millet","name":"Browntop Millet","frontImage":"Browntop Millet Front.jpeg","backImage":"Browntop Millet Back.jpeg","price":"₹199","originalPrice":"₹299","weight":"500g","description":"Premium Browntop Millet for healthy cooking. Gluten-free, high fiber.","benefits":["Rich in antioxidants","Supports digestion","Gluten-free grain"],"ingredients":["Browntop Millet"],"howToUse":"Rinse and cook 1:3 ratio with water for 20 mins. Perfect for upma, dosa.","nutrition":{"Protein":"11g","Fiber":"9g","Calories":"350kcal"},"tags":["Gluten Free","High Fiber"]},{"id":"brown-millet","name":"Brown Millet","frontImage":"Brown Millet Front.jpeg","backImage":"Brown Millet Back.jpeg","price":"₹179","originalPrice":"₹249","weight":"500g","description":"Nutritious Brown Millet perfect for daily meals.","benefits":["Heart healthy","Blood sugar control","High mineral content"],"ingredients":["Brown Millet"],"howToUse":"Soak overnight, pressure cook. Use in khichdi, porridge.","nutrition":{"Protein":"10g","Fiber":"8g","Calories":"340kcal"},"tags":["Diabetes Friendly","Organic"]},{"id":"barnyard-millet","name":"Barnyard Millet","frontImage":"Barnyard Millet Front.jpeg","backImage":"Barnyard Millet Back.jpeg","price":"₹189","originalPrice":"₹259","weight":"500g","description":"Fasting-friendly Barnyard Millet with complete nutrition.","benefits":["Ideal for fasting","Low glycemic index","Weight management"],"ingredients":["Barnyard Millet"],"howToUse":"Cook like rice. Perfect for vrat recipes.","nutrition":{"Protein":"11.5g","Fiber":"10g","Calories":"320kcal"},"tags":["Fasting","Low GI"]},{"id":"finger-millet","name":"Finger Millet (Ragi)","frontImage":"Finger Millet Front.jpeg","backImage":"Finger Millet Back.jpeg","price":"₹169","originalPrice":"₹229","weight":"500g","description":"Calcium-rich Ragi for strong bones and teeth.","benefits":["Highest calcium content","Bone health","Lactose-free milk alternative"],"ingredients":["Finger Millet"],"howToUse":"Make ragi malt, rotis, porridge. Ferment for better digestion.","nutrition":{"Calcium":"344mg","Protein":"7g","Fiber":"3.6g"},"tags":["Calcium Rich","Baby Food"]},{"id":"foxtail-millet","name":"Foxtail Millet","frontImage":"Foxtail Millet Front.jpeg","backImage":"Foxtail Millet Back.jpeg","price":"₹199","originalPrice":"₹279","weight":"500g","description":"Ancient grain Foxtail Millet for sustained energy.","benefits":["Endurance building","Thyroid support","Easy digestion"],"ingredients":["Foxtail Millet"],"howToUse":"Replace rice in pulao, biryani, upma.","nutrition":{"Protein":"12g","Iron":"3mg","Calories":"351kcal"},"tags":["Energy Booster","Ancient Grain"]},{"id":"jowar-millet","name":"Jowar Millet (Sorghum)","frontImage":"Jowar Millet Front.jpeg","backImage":"Jowar Millet Back.jpeg","price":"₹159","originalPrice":"₹219","weight":"500g","description":"Protein-packed Jowar for muscle building.","benefits":["Complete protein","Gluten-free","Weight loss friendly"],"ingredients":["Jowar Millet"],"howToUse":"Bhakri, rotis, porridge. Pop for healthy snack.","nutrition":{"Protein":"11g","Fiber":"6.7g","Calories":"329kcal"},"tags":["Protein Rich","Weight Loss"]},{"id":"kodo-millet","name":"Kodo Millet","frontImage":"Kodo Millet Front.jpeg","backImage":"Kodo Millet Back.jpeg","price":"₹179","originalPrice":"₹249","weight":"500g","description":"Migraine-relieving Kodo Millet with medicinal properties.","benefits":["Migraine relief","Detox properties","Blood purification"],"ingredients":["Kodo Millet"],"howToUse":"Idli, dosa batter. Medicinal rice substitute.","nutrition":{"Protein":"8.3g","Carbs":"65g","Calories":"321kcal"},"tags":["Medicinal","Detox"]},{"id":"little-millet","name":"Little Millet","frontImage":"Little Millet Front.jpeg","backImage":"Little Millet Back.jpeg","price":"₹189","originalPrice":"₹269","weight":"500g","description":"Tiny but mighty Little Millet for complete nutrition.","benefits":["High antioxidants","Anti-diabetic","Easy to cook"],"ingredients":["Little Millet"],"howToUse":"Quick cooking like rice. Perfect for busy days.","nutrition":{"Protein":"9.7g","Fiber":"7.6g","Calories":"207kcal"},"tags":["Antioxidant","Quick Cook"]},{"id":"pearl-millet","name":"Pearl Millet (Bajra)","frontImage":"Pearl Millet Front.jpeg","backImage":"Pearl Millet Back.jpeg","price":"₹149","originalPrice":"₹199","weight":"500g","description":"Winter superfood Pearl Millet for warmth and energy.","benefits":["Heat generating","Respiratory health","High energy"],"ingredients":["Pearl Millet"],"howToUse":"Khichdi, rotla, porridge. Winter favorite.","nutrition":{"Protein":"11.6g","Iron":"8mg","Calories":"361kcal"},"tags":["Winter Food","Iron Rich"]}
+]

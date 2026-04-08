@@ -6,6 +6,7 @@ interface CartItem {
   image: string;
   price: string;
   quantity: number;
+  variant?: string;
 }
 
 type CartAction =
