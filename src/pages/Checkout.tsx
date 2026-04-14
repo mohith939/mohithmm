@@ -1,7 +1,16 @@
 import { useState } from "react";
+import productsData from '../products.json';
+import { calculateShipping } from '../lib/shipping';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Truck, CheckCircle2, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,7 +39,8 @@ const Checkout = () => {
     const priceNum = parseInt(item.price.replace('₹', ''));
     return sum + (priceNum * item.quantity);
   }, 0);
-  const shipping = totalPrice >= 499 ? 0 : 49;
+  const totalWeightKg = cart.reduce((sum, item) => sum + (item.weightKg * item.quantity), 0);
+  const shipping = formData.state ? calculateShipping(totalWeightKg, formData.state) : 0;
   const grandTotal = totalPrice + shipping;
 
   const handleInputChange = (e) => {
@@ -46,7 +56,8 @@ const Checkout = () => {
         id: item.id,
         name: item.name,
         price: parseInt(item.price.replace('₹', '')),
-        quantity: item.quantity
+        quantity: item.quantity,
+        weightKg: item.weightKg
       }));
 
       const address = `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`;
@@ -60,6 +71,10 @@ const Checkout = () => {
           customerName: formData.customerName,
           phone: formData.phone,
           address,
+          state: formData.state,
+          totalWeightKg,
+          shippingCharge: shipping,
+          subtotal: totalPrice,
           items,
           totalAmount: grandTotal,
         }),
@@ -198,16 +213,43 @@ const Checkout = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="state">State</Label>
-                        <Input 
-                          id="state" 
-                          required 
-                          placeholder="State" 
-                          className="mt-1.5"
-                          value={formData.state}
-                          onChange={handleInputChange}
-                        />
-                      </div>
+                      <Label htmlFor="state">State</Label>
+                      <Select value={formData.state} onValueChange={(value) => setFormData({...formData, state: value})} required>
+                        <SelectTrigger className="mt-1.5 [&>span]:pl-2">
+                          <SelectValue placeholder="Select state" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="andhra pradesh">Andhra Pradesh</SelectItem>
+                          <SelectItem value="arunachal pradesh">Arunachal Pradesh</SelectItem>
+                          <SelectItem value="assam">Assam</SelectItem>
+                          <SelectItem value="bihar">Bihar</SelectItem>
+                          <SelectItem value="chhattisgarh">Chhattisgarh</SelectItem>
+                          <SelectItem value="goa">Goa</SelectItem>
+                          <SelectItem value="gujarat">Gujarat</SelectItem>
+                          <SelectItem value="haryana">Haryana</SelectItem>
+                          <SelectItem value="himachal pradesh">Himachal Pradesh</SelectItem>
+                          <SelectItem value="jharkhand">Jharkhand</SelectItem>
+                          <SelectItem value="karnataka">Karnataka</SelectItem>
+                          <SelectItem value="kerala">Kerala</SelectItem>
+                          <SelectItem value="madhya pradesh">Madhya Pradesh</SelectItem>
+                          <SelectItem value="maharashtra">Maharashtra</SelectItem>
+                          <SelectItem value="manipur">Manipur</SelectItem>
+                          <SelectItem value="meghalaya">Meghalaya</SelectItem>
+                          <SelectItem value="mizoram">Mizoram</SelectItem>
+                          <SelectItem value="nagaland">Nagaland</SelectItem>
+                          <SelectItem value="odisha">Odisha</SelectItem>
+                          <SelectItem value="punjab">Punjab</SelectItem>
+                          <SelectItem value="rajasthan">Rajasthan</SelectItem>
+                          <SelectItem value="sikkim">Sikkim</SelectItem>
+                          <SelectItem value="tamil nadu">Tamil Nadu</SelectItem>
+                          <SelectItem value="telangana">Telangana</SelectItem>
+                          <SelectItem value="tripura">Tripura</SelectItem>
+                          <SelectItem value="uttar pradesh">Uttar Pradesh</SelectItem>
+                          <SelectItem value="uttarakhand">Uttarakhand</SelectItem>
+                          <SelectItem value="west bengal">West Bengal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                       <div>
                         <Label htmlFor="pincode">Pincode</Label>
                         <Input 
@@ -254,12 +296,9 @@ const Checkout = () => {
                       <span>₹{totalPrice}</span>
                     </div>
                     <div className="flex justify-between text-muted-foreground">
-                      <span>Shipping</span>
-                      <span>{shipping === 0 ? "FREE" : `₹${shipping}`}</span>
+                      <span>{totalWeightKg > 0 ? `Shipping (${totalWeightKg.toFixed(2)}kg)` : 'Shipping'}</span>
+                      <span>₹{shipping}</span>
                     </div>
-                    {shipping > 0 && (
-                      <p className="text-xs text-accent">Add ₹{499 - totalPrice} more for free delivery</p>
-                    )}
                   </div>
 
                   <Separator className="my-4" />
@@ -283,15 +322,15 @@ const Checkout = () => {
                     ) : (
                       <>
                         <Truck className="h-4 w-4" />
-                        Place Order (COD)
+                        Place Order
                       </>
                     )}
                   </Button>
 
                   <div className="mt-5 space-y-2">
-                    {[
-                      { icon: Truck, text: "Free delivery above ₹499" },
-                    ].map((item) => (
+{[
+  { icon: Truck, text: "Shipping based on weight & destination" },
+].map((item) => (
                       <div key={item.text} className="flex items-center gap-2 text-xs text-muted-foreground">
                         <item.icon className="h-3.5 w-3.5 text-primary" />
                         {item.text}

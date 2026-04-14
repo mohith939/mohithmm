@@ -18,7 +18,6 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", to: "/" },
-    { label: "Products", to: "/products" },
     { label: "About", to: "/about" },
     { label: "How it Works", to: "/how-it-works" },
     { label: "Contact", to: "/contact" },
@@ -57,9 +56,9 @@ const Navbar = () => {
               </Link>
             ))}
             <Link to="/cart" className="relative p-2 rounded-lg bg-gradient-to-r from-amber-400 to-orange-400 hover:scale-105 transition-all shadow-md">
-              <ShoppingCart className="h-3.5 w-3.5 text-white" />
+              <ShoppingCart className="h-5 w-5 text-white" />
               {totalCartItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full h-4.5 w-4.5 flex items-center justify-center font-bold">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse">
                   {totalCartItems}
                 </span>
               )}

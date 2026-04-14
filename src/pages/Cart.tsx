@@ -89,7 +89,7 @@ const Cart = () => {
               <span>Total items: {totalItems}</span>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-primary mb-3">₹{totalPrice}</div>
+              <div className="text-2xl font-bold text-primary mb-3">₹{totalPrice} <span className="text-sm text-muted-foreground">(excl. shipping)</span></div>
               <div className="flex gap-3">
                 <Button variant="outline" onClick={clearCart} className="rounded-full">
                   Clear Cart

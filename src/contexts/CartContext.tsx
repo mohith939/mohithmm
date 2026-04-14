@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, ReactNode } from 'react';
+import { getProductWeight } from '../lib/shipping';
 
 interface CartItem {
   id: string;
@@ -6,6 +7,7 @@ interface CartItem {
   image: string;
   price: string;
   quantity: number;
+  weightKg: number;
   variant?: string;
 }
 
@@ -70,11 +72,13 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
 
   const addItem = (itemData: Omit<CartItem, 'quantity'>) => {
-    dispatch({ type: 'ADD_ITEM', payload: { ...itemData, quantity: 1 } });
+    const weightKg = getProductWeight(itemData.id);
+    dispatch({ type: 'ADD_ITEM', payload: { ...itemData, weightKg, quantity: 1 } });
   };
 
   const addItemWithQuantity = (itemData: Omit<CartItem, 'quantity'>, qty: number) => {
-    dispatch({ type: 'ADD_ITEM', payload: { ...itemData, quantity: qty } });
+    const weightKg = getProductWeight(itemData.id);
+    dispatch({ type: 'ADD_ITEM', payload: { ...itemData, weightKg, quantity: qty } });
   };
 
   const updateQuantity = (id: string, quantity: number) => {
