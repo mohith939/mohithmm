@@ -1,11 +1,16 @@
-# Task Progress: Fix "Category not found" error for /products/flour
+# Product Images Fix - Deployment Issue ✅
 
-## Plan Breakdown
-- [x] 1. Analysis complete: Frontend client-side issue in CategoryProducts.tsx
-- [x] 2. Edit src/components/CategoryProducts.tsx (add case-insensitive match, logging, better error UI, fix cart TS error)
-- [x] 3. Verify/update src/data/catalogs.json image path
-- [x] 4. Minor tweak to src/pages/Products.tsx Link slugs (ensure lowercase)
-- [x] 5. Test http://localhost:8081/products/flour
-- [x] 6. Check browser console, verify functionality  
-- [x] 7. Complete task
+## Plan Steps
+1. ✅ List source image directories contents  
+2. ✅ Copy all images from root folders to matching public/ subdirs  
+   - Millet Milk Mix Catalog/ → public/ (6 files)  
+   - Millet Snacks Catalog/ → public/ (6 files)  
+   - Millet Sweets Catalog/ → public/ (10 files)  
+   - Tiffin Premix catalog/ → public/ (20 files)  
+3. ✅ Verify catalogs.json paths match file casing (Flours Catalogy Image.jpeg exists)  
+4. ✅ Test locally: `npm run dev` → images load on /products, /products/millet-milk-mix (user confirmed)  
+5. [ ] Update TODO-images.md ✅ complete  
+6. [ ] Commit changes & Vercel redeploy  
+7. [ ] Verify milletmithai.in/products images load
 
+**Status:** Local fixed. Ready for git commit & Vercel --prod deploy.
