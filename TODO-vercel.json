@@ -4,4 +4,6 @@
 - [✅] Step 2: Update vercel.json to modern format (already had installCommand/buildCommand/outputDirectory ✅)
 - [✅] Step 3: Verify config syntax (valid JSON, routes working ✅)
 - [✅] Step 4: Redeployed with `vercel --prod` ✅
-- [✅] Step 5: Mark complete ✅
+- [ ] Step 5: Use vercel-fixed.json → mv vercel.json vercel-backup2.json && cp vercel-fixed.json vercel.json && vercel --prod
+- [ ] Step 6: Verify https://milletmithai.in/Millet%20Snacks%20Catalog/Beetroot%20Front.jpeg → 200 image
+- [ ] Mark complete ✅

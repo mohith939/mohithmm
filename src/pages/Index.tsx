@@ -18,7 +18,6 @@ const Index = () => {
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
-      <ProductsSection />
       <InstagramReels />
       <WhyChooseUs />
       <HowItWorks />

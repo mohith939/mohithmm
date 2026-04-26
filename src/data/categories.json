@@ -1,0 +1,51 @@
+[
+  {
+    "id": "flours",
+    "slug": "flours",
+    "name": "Flour Catalog",
+    "image": "images/categories/flours.jpg",
+    "description": "Nutrient-dense sprouted millet flours for easy digestion and healthy cooking."
+  },
+  {
+    "id": "snacks",
+    "slug": "snacks",
+    "name": "Millet Snacks",
+    "image": "images/categories/snacks.jpg",
+    "description": "Crunchy baked millet snacks — a healthy alternative to chips."
+  },
+  {
+    "id": "sweets",
+    "slug": "sweets",
+    "name": "Millet Sweets",
+    "image": "images/categories/sweets.jpg",
+    "description": "Traditional millet-based sweet mixes for guilt-free desserts."
+  },
+  {
+    "id": "tiffin",
+    "slug": "tiffin",
+    "name": "Tiffin Premix",
+    "image": "images/categories/tiffin.jpg",
+    "description": "Instant tiffin premixes for quick and healthy breakfasts."
+  },
+  {
+    "id": "milk-mix",
+    "slug": "milk-mix",
+    "name": "Millet Milk Mix",
+    "image": "images/categories/milk-mix.jpg",
+    "description": "Calcium-rich sprouted ragi milk mix for daily health drinks."
+  },
+  {
+    "id": "icecream",
+    "slug": "icecream",
+    "name": "Icecream Mix",
+    "image": "images/categories/icecream.jpg",
+    "description": "Make creamy millet icecream at home with natural ingredients."
+  },
+  {
+    "id": "travel",
+    "slug": "travel",
+    "name": "Travel Mix",
+    "image": "images/categories/travel.jpg",
+    "description": "Ready-to-cook travel mixes — just add hot water and enjoy."
+  }
+]

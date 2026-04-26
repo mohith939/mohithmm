@@ -141,23 +141,23 @@ const [product, setProduct] = useState<(Product | GroupedProduct) | null>(null);
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Images & Gallery - Swipe Carousel */}
               <div className="space-y-4">
-                <div className="w-full aspect-square rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-card to-muted/30">
+                <div className="w-full h-[1402px] max-w-[1121px] mx-auto rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-card to-muted/30">
                   <Carousel opts={{ align: 'start', loop: true }} className="w-full h-full">
                     <CarouselContent className="-ml-4 md:-ml-6 h-full">
                       <CarouselItem className="pl-4 md:pl-6 basis-full">
                         <img 
                           src={`/${product.frontImage.replace(/ /g, '%20')}`} 
                           alt={product.name}
-                          className="w-full h-full object-cover rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-contain rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
                         />
                       </CarouselItem>
                       {product.backImage && (
                         <CarouselItem className="pl-4 md:pl-6 basis-full">
                           <img 
-                            src={`/${product.backImage.replace(/ /g, '%20')}`} 
-                            alt={`${product.name} back`}
-                            className="w-full h-full object-cover rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
-                          />
+                          src={`/${product.backImage.replace(/ /g, '%20')}`} 
+                          alt={`${product.name} back`}
+                          className="w-full h-full object-contain rounded-3xl brightness-100 hover:scale-105 transition-transform duration-500"
+                        />
                         </CarouselItem>
                       )}
                     </CarouselContent>
